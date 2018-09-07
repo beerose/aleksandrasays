@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import onClickOutside from "react-onclickoutside";
 
 import { HamburgerStripe } from './HamburgerStripe';
 
@@ -16,9 +17,13 @@ const HamburgerMenuContainer = styled.div`
   align-items: flex-end;
 `
 
-export default class HamburgerMenu extends React.Component<{}, State> {
+class HamburgerMenu extends React.Component<{}, State> {
   state: State = {
     disabled: true,
+  };
+
+  handleClickOutside = evt => {
+    this.setState({ ...this.state, disabled: true });
   };
 
   render() {
@@ -34,3 +39,5 @@ export default class HamburgerMenu extends React.Component<{}, State> {
     );
   }
 }
+
+export default onClickOutside(HamburgerMenu);
