@@ -1,18 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { style as tss } from 'typestyle';
-import { Link } from 'react-router-dom'
-
 
 type Props = {
   text: string,
   linkTo: string;
   disabled: boolean;
   target?: string;
-};
-
-type State = {
-  disabled: boolean;
 };
 
 const StyledHamburgerStripe = styled.div`
@@ -35,24 +29,16 @@ const styles = {
   }),
 }
 
-export class HamburgerStripe extends React.Component<Props, State> {
-  state: State = {
-    disabled: true,
-  };
-
-  componentWillReceiveProps(nextProps: Props) {
-    this.setState({ disabled: nextProps.disabled });
-  }
-
+export class HamburgerStripe extends React.Component<Props, {}> {
   render() {
-    const { disabled } = this.state;
+    const { disabled, text, target } = this.props;
     return (
       disabled ? (
         <StyledHamburgerStripe className={styles.rolled} />
       ) : (
-        <a href={this.props.linkTo} target={this.props.target}>
+        <a href={this.props.linkTo} target={target}>
           <StyledHamburgerStripe className={styles.unrolled}>
-            {this.props.text}
+            {text}
           </StyledHamburgerStripe>
         </a>
       )
