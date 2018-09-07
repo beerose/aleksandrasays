@@ -6,7 +6,7 @@ const greetingText = 'I’m Aleksandra Sikora. Fullstack developer, based in Wro
 
 const Container = styled.div`
   position: fixed;
-  bottom: 25%;
+  bottom: 15%;
   left: 10%;
   font-size: 65px;
   font-weight: 700;

@@ -18,6 +18,7 @@ dist/
 .cache/
 .DS_Store
 .sass-cache
+package-lock.json
 
 
 
