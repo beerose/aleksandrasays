@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { style as tss } from 'typestyle';
+import { Link } from 'react-router-dom'
 
 
 type Props = {
   text: string,
-  onClick?: () => void;
+  linkTo: string;
   disabled: boolean;
+  target?: string;
 };
 
 type State = {
@@ -24,10 +26,8 @@ const styles = {
   rolled: tss({
     width: 60,
     height: 10,
-    alignItems: 'center',
   }),
   unrolled: tss({
-    textAlign: 'center',
     height: 30,
     width: 'fit-content',
     padding: '10px 10px 0px 10px',
@@ -47,9 +47,15 @@ export class HamburgerStripe extends React.Component<Props, State> {
   render() {
     const { disabled } = this.state;
     return (
-      <StyledHamburgerStripe className={disabled ? styles.rolled : styles.unrolled}>
-        {!disabled && this.props.text}
-      </StyledHamburgerStripe>
+      disabled ? (
+        <StyledHamburgerStripe className={styles.rolled} />
+      ) : (
+        <a href={this.props.linkTo} target={this.props.target}>
+          <StyledHamburgerStripe className={styles.unrolled}>
+            {this.props.text}
+          </StyledHamburgerStripe>
+        </a>
+      )
     );
   }
 }

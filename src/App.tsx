@@ -1,5 +1,5 @@
 import React, {Component, StatelessComponent } from "react";
-import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 
 import img from "./assets/img/background.png";
@@ -17,6 +17,7 @@ export const App: StatelessComponent = () => (
   <Router>
     <Content>
       <Switch>
+        <Route exact path="/medium" />
         <Route exact path="/" component={MainPage as any} />
       </Switch>
     </Content>
