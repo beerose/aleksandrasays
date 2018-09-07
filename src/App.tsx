@@ -3,7 +3,8 @@ import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 
 import img from "./assets/img/background.png";
-import { MainPage } from "./components/";
+import { Hamburger } from './components/Hamburger';
+import Greetings from './components/Greetings';
 
 const Content = styled.div`
   background-image: url(${img});
@@ -16,10 +17,13 @@ const Content = styled.div`
 export const App: StatelessComponent = () => (
   <Router>
     <Content>
-      <Switch>
-        <Route exact path="/medium" />
-        <Route exact path="/" component={MainPage as any} />
-      </Switch>
+      <>
+      <Hamburger />
+        <Switch>
+          <Route exact path="/medium" />
+          <Route exact path="/" component={Greetings as any} />
+        </Switch>
+      </>
     </Content>
   </Router>
 );

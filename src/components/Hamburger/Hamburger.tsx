@@ -22,7 +22,7 @@ class HamburgerMenu extends React.Component<{}, State> {
     disabled: true,
   };
 
-  handleClickOutside = evt => {
+  handleClickOutside = () => {
     this.setState({ ...this.state, disabled: true });
   };
 

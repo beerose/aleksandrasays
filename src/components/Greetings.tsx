@@ -16,7 +16,7 @@ const Container = styled.div`
 `;
   
 
-const Greeting: React.SFC<{}> = () => (
+const Greetings: React.SFC<{}> = () => (
   <Container>
     Hi!
     <br />
@@ -24,4 +24,4 @@ const Greeting: React.SFC<{}> = () => (
   </Container>
 );
   
-export default Greeting;
+export default Greetings;

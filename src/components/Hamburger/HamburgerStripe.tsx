@@ -11,21 +11,22 @@ type Props = {
 
 const StyledHamburgerStripe = styled.div`
   background: #0008CE;
-  margin: 3.5px;
+  margin: 4px;
   color: white;
   border-radius: 2px;
 `;
 
 const styles = {
   rolled: tss({
-    width: 60,
-    height: 10,
+    width: 70,
+    height: 15,
   }),
   unrolled: tss({
-    height: 30,
+    height: 40,
     width: 'fit-content',
     padding: '10px 10px 0px 10px',
     textAlignLast: 'right',
+    fontSize: 25,
   }),
 }
 
@@ -36,7 +37,7 @@ export class HamburgerStripe extends React.Component<Props, {}> {
       disabled ? (
         <StyledHamburgerStripe className={styles.rolled} />
       ) : (
-        <a href={this.props.linkTo} target={target}>
+        <a href={this.props.linkTo} target={target} style={{textDecoration: 'none'}}>
           <StyledHamburgerStripe className={styles.unrolled}>
             {text}
           </StyledHamburgerStripe>
