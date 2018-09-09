@@ -9,10 +9,8 @@ type State = {
 };
 
 const HamburgerMenuContainer = styled.div`
-  position: fixed;
-  top: 5%;
-  right: 5%;
   display: flex;
+  float: right;
   flex-direction: column;
   align-items: flex-end;
 `
