@@ -1,4 +1,4 @@
-import React from "react";
+import React, { HTMLAttributes, AllHTMLAttributes } from "react";
 import styled from "styled-components";
 
 import { Header } from './Header';
@@ -20,7 +20,7 @@ const MainCopyBox = styled.div`
   font-size: 1.6em;
   font-weight: 600;
   line-height: 1.4;
-  color: #0008ce;
+  color: #3653ab;
   background: white;
   padding: 5% 5% 5% 5%;
   height: fit-content;
@@ -29,7 +29,7 @@ const MainCopyBox = styled.div`
 const SecondaryCopyBox = styled.div`
   font-size: 1em;
   line-height: 1.4;
-  color: #0008ce;
+  color: #3653ab;
   background: white;
   padding: 0% 5% 5% 5%;
   height: fit-content;
@@ -44,7 +44,7 @@ const Container = styled.div`
 `;
 
 const StyledText = styled.span`
-  background: #0008ce;
+  background: #3653ab;
   font-weight: 400;
   color: white;
   padding: 1px 4px 1px 4px;
@@ -52,10 +52,11 @@ const StyledText = styled.span`
   font-weight: 50;
 `
 
+type Props = AllHTMLAttributes<HTMLDivElement>;
 export default class About extends React.Component {
   render() {
     return (
-      <Container>
+      <Container {...this.props}>
         <Header showArrow={true}/>
         <CopyContainer>
           <MainCopyBox>

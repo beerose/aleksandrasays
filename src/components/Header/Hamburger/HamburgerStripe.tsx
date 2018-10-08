@@ -1,25 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import { style as tss } from 'typestyle';
+import { Link } from 'react-router-dom';
 
 type Props = {
   text: string,
   linkTo: string;
   disabled: boolean;
-  target?: string;
+  external?: boolean;
 };
 
 const StyledHamburgerStripe = styled.div`
-  background: #0008CE;
+  background: #3653ab;
   margin: 4px;
   color: white;
-  border-radius: 2px;
+  border-radius: 1px;
 `;
 
 const styles = {
   rolled: tss({
-    width: 70,
-    height: 15,
+    width: 60,
+    height: 12,
   }),
   unrolled: tss({
     height: 40,
@@ -32,16 +33,27 @@ const styles = {
 
 export class HamburgerStripe extends React.Component<Props, {}> {
   render() {
-    const { disabled, text, target } = this.props;
+    const { disabled, text, external, linkTo } = this.props;
     return (
       disabled ? (
         <StyledHamburgerStripe className={styles.rolled} />
       ) : (
-        <a href={this.props.linkTo} target={target} style={{textDecoration: 'none'}}>
-          <StyledHamburgerStripe className={styles.unrolled}>
-            {text}
-          </StyledHamburgerStripe>
-        </a>
+        external ? (
+          <a href={linkTo} target={'_blank'} style={{textDecoration: 'none'}}>
+            <StyledHamburgerStripe className={styles.unrolled}>
+              {text}
+            </StyledHamburgerStripe>
+          </a>
+        ) : (
+          <Link
+            to={linkTo}
+            style={{ textDecoration: 'none' }}
+          >
+            <StyledHamburgerStripe className={styles.unrolled}>
+              {text}
+            </StyledHamburgerStripe>
+          </Link>
+        )
       )
     );
   }

@@ -3,14 +3,14 @@ import { style as tss } from 'typestyle';
 
 const styles = {
     medium: tss({
-      background: '#0008CE',
+      background: '#3653ab',
       color: '#ffffff',
       textAlign: 'center',
       width: 'fit-content',
     }),
     strong: tss({
-      border: 'solid 2px #0008CE',
-      color: '#0008CE',
+      border: 'solid 2px #3653ab',
+      color: '#3653ab',
       textAlign: 'center',
       width: 'fit-content',
     }),

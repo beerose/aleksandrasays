@@ -8,11 +8,11 @@ const email = 'hello@aleksandrasays.com';
 
 const Container = styled.div`
   position: fixed;
-  bottom: 35%;
+  bottom: 45%;
   font-size: 3em;
   font-weight: 700;
   line-height: 1.4;
-  color: #0008CE;
+  color: #3653ab;
   width: 100%;
   text-align: center;
   display: flex;
@@ -20,12 +20,19 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const SocialIconsContainer = styled.div`
+  position: absolute;
+  top: 60px;
+`
+
 const Contact: React.SFC<{}> = () => (
   <>
     <Header />
     <Container>
       {email}
-    <SocialIconsPanel />
+    <SocialIconsContainer>
+      <SocialIconsPanel />
+    </SocialIconsContainer>
     </Container>
   </>
 );

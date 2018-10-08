@@ -11,7 +11,6 @@ const HeaderContainer = styled.div`
   height: fit-content;
   width: 94%;
   padding-top: 3%;
-  padding-left: 3%;
 `;
 
 export class Header extends React.Component<Props, {}> {

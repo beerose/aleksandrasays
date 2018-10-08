@@ -10,9 +10,12 @@ type State = {
 
 const HamburgerMenuContainer = styled.div`
   display: flex;
-  float: right;
   flex-direction: column;
   align-items: flex-end;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
 `
 
 class HamburgerMenu extends React.Component<{}, State> {
@@ -31,7 +34,7 @@ class HamburgerMenu extends React.Component<{}, State> {
     return (
       <HamburgerMenuContainer onClick={handleHamburgerClick}>
         <HamburgerStripe linkTo={'about'} disabled={this.state.disabled} text='About me'/>
-        <HamburgerStripe target={'_blank'} linkTo={'https://www.medium.com/@aleksandrasays'} disabled={this.state.disabled} text='Blog'/>
+        <HamburgerStripe external={true} linkTo={'https://www.medium.com/@aleksandrasays'} disabled={this.state.disabled} text='Blog'/>
         <HamburgerStripe linkTo={'contact'} disabled={this.state.disabled} text='Contact'/>
       </HamburgerMenuContainer>
     );

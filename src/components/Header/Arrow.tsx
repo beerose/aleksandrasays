@@ -2,15 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { arrow } from '../../assets/svg';
+import { Link } from 'react-router-dom';
 
 const StyledArrow = styled('img')`
     width: 60px;
-    padding-top: 2px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
 `;
-  
+
 export const Arrow: React.SFC<{}> = () => (
-  <a href='/'>
+  <Link to={'/'}>
     <StyledArrow src={arrow} />
-  </a>
+  </Link>
 );
-  

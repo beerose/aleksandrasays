@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Typed from 'react-typed';
 
 import { SocialIconsPanel } from './SocialIcons';
 import { Header } from './Header';
@@ -13,7 +14,7 @@ const Container = styled.div`
   font-size: 65px;
   font-weight: 700;
   line-height: 1.4;
-  color: #0008CE;
+  color: #3653ab;
   max-width: 70%;
 `;
 
