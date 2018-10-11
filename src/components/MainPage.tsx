@@ -1,42 +1,32 @@
-import React from 'react';
-import styled from 'styled-components';
-import Typed from 'react-typed';
+import React, { AllHTMLAttributes } from "react";
+import styled from "styled-components";
 
-import { SocialIconsPanel } from './SocialIcons';
-import { Header } from './Header';
-
-const greetingText = 'I’m Aleksandra Sikora. Fullstack developer, based in Wrocław.';
-
-const Container = styled.div`
-  position: fixed;
-  bottom: 25%;
-  left: 10%;
-  font-size: 65px;
-  font-weight: 700;
-  line-height: 1.4;
-  color: #3653ab;
-  max-width: 70%;
-`;
+import { darken } from "polished";
+import { Spring } from "react-spring";
+import { Color } from "../Color";
+import { Greeting } from "./Greeting";
+import { SocialIconsPanel } from "./SocialIcons";
 
 const SocialIconsContainer = styled.div`
   position: fixed;
   bottom: 5%;
   right: 5%;
-`
-  
+`;
 
-const MainPage: React.SFC<{}> = () => (
-  <div style={{ position: 'relative' }}>
-    <Header showArrow={false}/>
-    <Container>
-      Hi!
-      <br />
-      {greetingText}
-    </Container>
-    <SocialIconsContainer>
-      <SocialIconsPanel />
-    </SocialIconsContainer>
-  </div>
-);
-  
+type Props = { greetingsVisible: boolean } & AllHTMLAttributes<HTMLDivElement>;
+
+class MainPage extends React.Component<Props> {
+  public render() {
+    const { greetingsVisible } = this.props;
+    return (
+      <div style={{ position: "relative", height: "100%" }}>
+        <Greeting unmount={!greetingsVisible} color={Color.Blue} />
+        <SocialIconsContainer>
+          <SocialIconsPanel />
+        </SocialIconsContainer>
+      </div>
+    );
+  }
+}
+
 export default MainPage;

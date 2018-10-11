@@ -1,3 +1,9 @@
 {
-    "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "python.autoComplete.extraPaths": [
+    "${env.SPARK_HOME}/python",
+    "${env.SPARK_HOME}/python/pyspark"
+  ],
+  "typescript.referencesCodeLens.enabled": true,
+  "javascript.referencesCodeLens.enabled": true
 }

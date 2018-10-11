@@ -1,85 +1,101 @@
-import React, { HTMLAttributes, AllHTMLAttributes } from "react";
+import React, { AllHTMLAttributes, HTMLAttributes } from "react";
 import styled from "styled-components";
 
-import { Header } from './Header';
+import { Spring } from "react-spring";
+import { Color } from "../Color";
+import { Greeting } from "./Greeting";
+import PinkClippedLayer from "./PinkClippedLayer";
 
-const copy: string[] = [
-  `My name is Aleksandra Sikora and I am a full-stack developer from Wrocław. I'm a functional programming enthusiast, constantly experimenting with new technologies. I'm very passionate about web development and web design, striving to improve my skills every day.`,
-  `Before starting working as a developer I’ve been a robotics and informatics teacher for children, which gave me a nice opportunity to learn how to express big ideas in a less complicated way along with how to stay extremely calm and patient whatever happens.`,
-  `In my computer-free time I am a sports lover, especially interested in climbing and tennis. But when I’m too sore for a training you can find me wander around some art museum. I’m definitely into art, both classical as well as contemporary. `,
-];
+import { CopyBox } from "./AboutBox";
 
 const CopyContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  height: 600px;
-`;
-
-const MainCopyBox = styled.div`
-  font-size: 1.6em;
-  font-weight: 600;
-  line-height: 1.4;
-  color: #3653ab;
-  background: white;
-  padding: 5% 5% 5% 5%;
-  height: fit-content;
-`;
-
-const SecondaryCopyBox = styled.div`
-  font-size: 1em;
-  line-height: 1.4;
-  color: #3653ab;
-  background: white;
-  padding: 0% 5% 5% 5%;
-  height: fit-content;
-`;
-
-const Container = styled.div`
-  display: flex;
   width: 100%;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
+  color: ${Color.Blue};
+  display: flex;
+  justify-content: center;
+  top: 40%;
+  position: absolute;
 `;
 
-const StyledText = styled.span`
-  background: #3653ab;
-  font-weight: 400;
-  color: white;
-  padding: 1px 4px 1px 4px;
-  border-radius: 2px;
-  font-weight: 50;
-`
+const AboutContainer = styled(PinkClippedLayer)`
+  background: ${Color.Pink};
+  display: flex;
+`;
 
-type Props = AllHTMLAttributes<HTMLDivElement>;
-export default class About extends React.Component {
-  render() {
+const WhatIDo = `
+My name is Aleksandra Sikora and I am a full-stack developer from Wrocław.
+I'm a functional programming enthusiast, constantly experimenting with new
+technologies. I'm very passionate about web development and web design,
+striving to improve my skills every day.
+`;
+
+const WhatILike = `
+In my computer-free time I am a sports lover, especially interested in
+climbing and tennis. But when I’m too sore for a training you can find me
+wander around some art museum. I’m definitely into art, both classical as
+well as contemporary.
+`;
+
+type Props = {
+  greetingsVisible: boolean;
+  mountAbout: boolean;
+} & AllHTMLAttributes<HTMLDivElement>;
+export default class About extends React.Component<Props> {
+  public render() {
+    const { greetingsVisible, mountAbout } = this.props;
+
+    // window.about = this;
+
     return (
-      <Container {...this.props}>
-        <Header showArrow={true}/>
+      <AboutContainer {...this.props}>
+        <Greeting unmount={!greetingsVisible} color={Color.Pink} />
         <CopyContainer>
-          <MainCopyBox>
-          My name is <StyledText>Aleksandra Sikora</StyledText> and I am a full-stack developer from Wrocław. 
-          I'm a functional programming enthusiast, 
-          constantly experimenting with new technologies. 
-          I'm very passionate about web development and web design, 
-          striving to improve my skills every day.
-          </MainCopyBox>
-          <SecondaryCopyBox>
-          Before starting working as a developer 
-          I’ve been a robotics and informatics teacher for children, 
-          which gave me a nice opportunity to learn how to express big ideas in a 
-          less complicated way along with how to stay extremely 
-          calm and patient whatever happens.
-          <br /><br />
-          In my computer-free time I am a sports lover, 
-          especially interested in climbing and tennis. 
-          But when I’m too sore for a training you can find me wander around some art museum. 
-          I’m definitely into art, both classical as well as contemporary.
-          </SecondaryCopyBox>
+          <CopyBox
+            shouldMount={mountAbout}
+            title={"Core"}
+            onClick={this.handleCopyBoxClick}
+            delay={mountAbout ? 1000 : 0}
+          />
+          <CopyBox
+            shouldMount={mountAbout}
+            title={"Love"}
+            onClick={this.handleCopyBoxClick}
+            delay={mountAbout ? 1000 : 0}
+          />
+          <CopyBox
+            shouldMount={mountAbout}
+            title={"Work"}
+            onClick={this.handleCopyBoxClick}
+            delay={mountAbout ? 1000 : 0}
+          />
         </CopyContainer>
-      </Container>
+      </AboutContainer>
     );
   }
+
+  private handleCopyBoxClick = () => {
+    console.log("click copy");
+  };
 }
+
+/*
+
+        <Spring
+          to={!greetingsVisible ? { x: -90, opacity: 0 } : { x: 0, opacity: 1 }}
+          // delay={2000}
+          config={{
+            friction: 32,
+            tension: 50,
+          }}
+        >
+          {({ x, opacity }) => (
+            <Copy
+              style={{
+                opacity,
+                transform: `translate3d(${x}vh, 0, 0)`,
+              }}
+            />
+          )}
+        </Spring>
+
+*/
