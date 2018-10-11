@@ -7,13 +7,23 @@ import { Greeting } from "./Greeting";
 import PinkClippedLayer from "./PinkClippedLayer";
 
 import { CopyBox } from "./AboutBox";
+import { CoreBox } from "./Core";
+
+const MenuContainer = styled.div`
+  width: 100%;
+  color: ${Color.Blue};
+  display: flex;
+  justify-content: center;
+  top: 40%;
+  position: absolute;
+`;
 
 const CopyContainer = styled.div`
   width: 100%;
   color: ${Color.Blue};
   display: flex;
   justify-content: center;
-  top: 40%;
+  top: 20%;
   position: absolute;
 `;
 
@@ -40,41 +50,74 @@ type Props = {
   greetingsVisible: boolean;
   mountAbout: boolean;
 } & AllHTMLAttributes<HTMLDivElement>;
-export default class About extends React.Component<Props> {
+
+type State = {
+  coreVisible: boolean;
+  loveVisible: boolean;
+  workVisible: boolean;
+  menuVisible: boolean;
+};
+export default class About extends React.Component<Props, State> {
+  public state = {
+    coreVisible: false,
+    loveVisible: false,
+    menuVisible: true,
+    workVisible: false,
+  };
   public render() {
     const { greetingsVisible, mountAbout } = this.props;
-
+    const { menuVisible, coreVisible, loveVisible, workVisible } = this.state;
     // window.about = this;
 
     return (
       <AboutContainer {...this.props}>
         <Greeting unmount={!greetingsVisible} color={Color.Pink} />
         <CopyContainer>
-          <CopyBox
-            shouldMount={mountAbout}
-            title={"Core"}
-            onClick={this.handleCopyBoxClick}
-            delay={mountAbout ? 1000 : 0}
-          />
-          <CopyBox
-            shouldMount={mountAbout}
-            title={"Love"}
-            onClick={this.handleCopyBoxClick}
-            delay={mountAbout ? 1000 : 0}
-          />
-          <CopyBox
-            shouldMount={mountAbout}
-            title={"Work"}
-            onClick={this.handleCopyBoxClick}
-            delay={mountAbout ? 1000 : 0}
+          <CoreBox
+            visible={coreVisible}
+            onCloseClick={this.handleCloseCoreClick}
           />
         </CopyContainer>
+        {menuVisible && (
+          <MenuContainer>
+            <CopyBox
+              shouldMount={mountAbout}
+              title={"Core"}
+              onClick={this.handleCoreClick}
+              delay={mountAbout ? 800 : 0}
+            />
+            <CopyBox
+              shouldMount={mountAbout}
+              title={"Love"}
+              onClick={this.handleLoveCLick}
+              delay={mountAbout ? 800 : 0}
+            />
+            <CopyBox
+              shouldMount={mountAbout}
+              title={"Work"}
+              onClick={this.handleWorkClick}
+              delay={mountAbout ? 800 : 0}
+            />
+          </MenuContainer>
+        )}
       </AboutContainer>
     );
   }
 
-  private handleCopyBoxClick = () => {
-    console.log("click copy");
+  private handleLoveCLick = () => {
+    this.setState({ loveVisible: true, menuVisible: false });
+  };
+
+  private handleWorkClick = () => {
+    this.setState({ workVisible: true, menuVisible: false });
+  };
+
+  private handleCoreClick = () => {
+    this.setState({ coreVisible: true, menuVisible: false });
+  };
+
+  private handleCloseCoreClick = () => {
+    this.setState({ coreVisible: false, menuVisible: true });
   };
 }
 

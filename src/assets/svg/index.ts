@@ -1,7 +1,8 @@
+import arrow from './arrow.svg';
+import cancel from './cancel.svg';
 import github from './github.svg';
 import instagram from './instagram.svg';
-import twitter from './twitter.svg';
 import linkedin from './linkedin.svg';
-import arrow from './arrow.svg';
+import twitter from './twitter.svg';
 
-export { github, instagram, twitter, linkedin, arrow };
+export {arrow, cancel, github, instagram, linkedin, twitter};

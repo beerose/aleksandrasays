@@ -1,6 +1,7 @@
 export const enum Color {
   Blue = "#004688",
   Pink = "#FF1654",
+  DarkPink = "#7c0021",
   Orange = "#F4D35E",
   Egg = "#EBEBD3",
 }
