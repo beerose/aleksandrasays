@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
 import onClickOutside from "react-onclickoutside";
+import styled from "styled-components";
 
-import { HamburgerStripe } from './HamburgerStripe';
+import { HamburgerStripe } from "./HamburgerStripe";
 
 type State = {
   disabled: boolean;
@@ -13,30 +13,50 @@ const HamburgerMenuContainer = styled.div`
   flex-direction: column;
   align-items: flex-end;
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 30px;
+  right: 25px;
   cursor: pointer;
-`
+`;
 
-class HamburgerMenu extends React.Component<{}, State> {
-  state: State = {
+type Props = {
+  visible: boolean;
+};
+class HamburgerMenu extends React.Component<Props, State> {
+  public state: State = {
     disabled: true,
   };
 
-  handleClickOutside = () => {
+  public handleClickOutside = () => {
     this.setState({ ...this.state, disabled: true });
   };
 
-  render() {
+  public render() {
     const handleHamburgerClick = () => {
       this.setState({ ...this.state, disabled: false });
-    }
+    };
     return (
-      <HamburgerMenuContainer onClick={handleHamburgerClick}>
-        <HamburgerStripe linkTo={'about'} disabled={this.state.disabled} text='About me'/>
-        <HamburgerStripe external={true} linkTo={'https://www.medium.com/@aleksandrasays'} disabled={this.state.disabled} text='Blog'/>
-        <HamburgerStripe linkTo={'contact'} disabled={this.state.disabled} text='Contact'/>
-      </HamburgerMenuContainer>
+      <>
+        {this.props.visible && (
+          <HamburgerMenuContainer onClick={handleHamburgerClick}>
+            <HamburgerStripe
+              linkTo={"about"}
+              disabled={this.state.disabled}
+              text="About me"
+            />
+            <HamburgerStripe
+              external={true}
+              linkTo={"https://www.medium.com/@aleksandrasays"}
+              disabled={this.state.disabled}
+              text="Blog"
+            />
+            <HamburgerStripe
+              linkTo={"contact"}
+              disabled={this.state.disabled}
+              text="Contact"
+            />
+          </HamburgerMenuContainer>
+        )}
+      </>
     );
   }
 }

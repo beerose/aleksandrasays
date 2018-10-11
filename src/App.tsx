@@ -80,7 +80,6 @@ export class Main extends React.Component<MainProps, State> {
 
     return (
       <>
-        <Header showArrow={pathname !== "/"} />
         <svg
           viewBox="0 0 1 1"
           preserveAspectRatio="xMidYMid slice"
@@ -112,7 +111,6 @@ export class Main extends React.Component<MainProps, State> {
         <MainPage greetingsVisible={this.state.greetingsVisible} />
         <About greetingsVisible={greetingsVisible} mountAbout={mountAbout} />
         {/* <Contact /> */}
-        <Header showArrow={pathname !== "/"} />
       </>
     );
   }

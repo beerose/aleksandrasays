@@ -1,8 +1,6 @@
 import React, { AllHTMLAttributes } from "react";
 import styled from "styled-components";
 
-import { darken } from "polished";
-import { Spring } from "react-spring";
 import { Color } from "../Color";
 import { Greeting } from "./Greeting";
 import { SocialIconsPanel } from "./SocialIcons";

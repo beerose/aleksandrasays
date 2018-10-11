@@ -8,6 +8,11 @@ import PinkClippedLayer from "./PinkClippedLayer";
 
 import { CopyBox } from "./AboutBox";
 import { CoreBox } from "./Core";
+import { Header } from "./Header";
+import { Arrow } from "./Header/Arrow";
+import { Hamburger } from "./Header/Hamburger";
+import { LoveBox } from "./Love";
+import { WorkBox } from "./Work";
 
 const MenuContainer = styled.div`
   width: 100%;
@@ -32,20 +37,6 @@ const AboutContainer = styled(PinkClippedLayer)`
   display: flex;
 `;
 
-const WhatIDo = `
-My name is Aleksandra Sikora and I am a full-stack developer from Wrocław.
-I'm a functional programming enthusiast, constantly experimenting with new
-technologies. I'm very passionate about web development and web design,
-striving to improve my skills every day.
-`;
-
-const WhatILike = `
-In my computer-free time I am a sports lover, especially interested in
-climbing and tennis. But when I’m too sore for a training you can find me
-wander around some art museum. I’m definitely into art, both classical as
-well as contemporary.
-`;
-
 type Props = {
   greetingsVisible: boolean;
   mountAbout: boolean;
@@ -57,13 +48,20 @@ type State = {
   workVisible: boolean;
   menuVisible: boolean;
 };
+const defaultState = {
+  coreVisible: false,
+  loveVisible: false,
+  menuVisible: true,
+  workVisible: false,
+};
 export default class About extends React.Component<Props, State> {
-  public state = {
-    coreVisible: false,
-    loveVisible: false,
-    menuVisible: true,
-    workVisible: false,
-  };
+  public state = defaultState;
+
+  public componentWillReceiveProps(nextProps: Props) {
+    if (this.props.mountAbout !== nextProps.mountAbout) {
+      this.setState({ ...defaultState });
+    }
+  }
   public render() {
     const { greetingsVisible, mountAbout } = this.props;
     const { menuVisible, coreVisible, loveVisible, workVisible } = this.state;
@@ -71,11 +69,21 @@ export default class About extends React.Component<Props, State> {
 
     return (
       <AboutContainer {...this.props}>
+        <Arrow visible={menuVisible && mountAbout} />
+        <Hamburger visible={menuVisible && mountAbout} />
         <Greeting unmount={!greetingsVisible} color={Color.Pink} />
         <CopyContainer>
           <CoreBox
-            visible={coreVisible}
-            onCloseClick={this.handleCloseCoreClick}
+            visible={coreVisible && mountAbout}
+            onCloseClick={this.handleCloseBoxClick}
+          />
+          <WorkBox
+            visible={workVisible && mountAbout}
+            onCloseClick={this.handleCloseBoxClick}
+          />
+          <LoveBox
+            visible={loveVisible && mountAbout}
+            onCloseClick={this.handleCloseBoxClick}
           />
         </CopyContainer>
         {menuVisible && (
@@ -94,7 +102,7 @@ export default class About extends React.Component<Props, State> {
             />
             <CopyBox
               shouldMount={mountAbout}
-              title={"Work"}
+              title={"Skills"}
               onClick={this.handleWorkClick}
               delay={mountAbout ? 800 : 0}
             />
@@ -116,8 +124,8 @@ export default class About extends React.Component<Props, State> {
     this.setState({ coreVisible: true, menuVisible: false });
   };
 
-  private handleCloseCoreClick = () => {
-    this.setState({ coreVisible: false, menuVisible: true });
+  private handleCloseBoxClick = () => {
+    this.setState({ ...defaultState });
   };
 }
 

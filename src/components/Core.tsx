@@ -52,6 +52,7 @@ export const CoreBox = (props: CoreBoxProps) => {
       enter={{ scale: 1.1, opacity: 1 }}
       leave={{ opacity: 0, scale: 0 }}
       config={{ friction: 5, tension: 15, velocity: 5 }}
+      delay={250}
     >
       {visible &&
         (({ scale, opacity }) => (

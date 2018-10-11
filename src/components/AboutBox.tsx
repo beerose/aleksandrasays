@@ -1,11 +1,9 @@
 import React, { AllHTMLAttributes, HTMLAttributes } from "react";
 import styled from "styled-components";
 
-import { darken, lighten } from "polished";
-import { Spring, Transition } from "react-spring";
+import { darken } from "polished";
+import { Transition } from "react-spring";
 import { Color } from "../Color";
-
-const CopyContainer = styled.div``;
 
 const CopyTitle = styled.div`
   color: ${darken(0.1, Color.Pink)};
@@ -13,9 +11,12 @@ const CopyTitle = styled.div`
   font-size: 4em;
   font-weight: 600;
   line-height: 1.4;
-  border-radius: 1px;
   margin: 30px;
   cursor: pointer;
+
+  &:hover {
+    color: ${darken(0.15, Color.Pink)};
+  }
 `;
 
 type CopyBoxProps = {
