@@ -16,7 +16,6 @@ import { WorkBox } from "./Work";
 
 const MenuContainer = styled.div`
   width: 100%;
-  color: ${Color.Blue};
   display: flex;
   justify-content: center;
   top: 40%;
@@ -25,7 +24,6 @@ const MenuContainer = styled.div`
 
 const CopyContainer = styled.div`
   width: 100%;
-  color: ${Color.Blue};
   display: flex;
   justify-content: center;
   top: 20%;

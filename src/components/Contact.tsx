@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { SocialIconsPanel } from './SocialIcons';
-import { Header } from './Header';
+import { SocialIconsPanel } from "./SocialIcons";
+import { Header } from "./Header";
 
-const email = 'hello@aleksandrasays.com';
+const email = "hello@aleksandrasays.com";
 
 const Container = styled.div`
   position: fixed;
@@ -12,7 +12,6 @@ const Container = styled.div`
   font-size: 3em;
   font-weight: 700;
   line-height: 1.4;
-  color: #3653ab;
   width: 100%;
   text-align: center;
   display: flex;
@@ -23,18 +22,18 @@ const Container = styled.div`
 const SocialIconsContainer = styled.div`
   position: absolute;
   top: 60px;
-`
+`;
 
 const Contact: React.SFC<{}> = () => (
   <>
     <Header />
     <Container>
       {email}
-    <SocialIconsContainer>
-      <SocialIconsPanel />
-    </SocialIconsContainer>
+      <SocialIconsContainer>
+        <SocialIconsPanel />
+      </SocialIconsContainer>
     </Container>
   </>
 );
-  
+
 export default Contact;

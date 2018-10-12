@@ -10,6 +10,9 @@ const StyledArrow = styled("img")`
   position: absolute;
   top: 25px;
   left: 25px;
+  path {
+    fill: pink;
+  }
 `;
 
 export const Arrow = ({ visible }: { visible: boolean }) => (
