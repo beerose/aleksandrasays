@@ -1,7 +1,6 @@
 import React, { AllHTMLAttributes } from "react";
 import styled from "styled-components";
 
-import { darken } from "polished";
 import { Transition } from "react-spring";
 import { cancel } from "../../assets/svg";
 import { Color } from "../../Color";
@@ -18,10 +17,10 @@ which gave me a nice opportunity to learn how to stay extremely calm and patient
 `;
 
 const TextComponent = styled.div`
-  color: ${darken(0.3, Color.TopColor)};
-  border: 1px solid ${darken(0.1, Color.TopColor)};
+  color: ${Color.SemiTransparentBlack};
+  border: 1px solid ${Color.SemiTransparentBlack};
   padding: 20px;
-  position: absulote;
+  position: absolute;
   font-size: 1.5em;
   font-weight: 150;
   line-height: 1.4;
@@ -30,7 +29,7 @@ const TextComponent = styled.div`
   max-width: 45%;
 `;
 
-const StyledImg = styled("img")`
+const StyledImg = styled.img`
   position: absolute;
   top: 0;
   right: 0;
@@ -56,20 +55,19 @@ export const CoreBox = (props: CoreBoxProps) => {
     >
       {visible &&
         (({ scale, opacity }) => (
-          <>
-            <TextComponent
-              style={{
-                opacity,
-                transform: `scale(${scale}, ${scale})`,
-              }}
-              onClick={onClick}
-            >
-              <StyledImg src={cancel} onClick={onCloseClick} />
-              {copy}
-              <br />
-              {anotherCopy}
-            </TextComponent>
-          </>
+          <TextComponent
+            style={{
+              position: "absolute",
+              opacity,
+              transform: `scale(${scale}, ${scale})`,
+            }}
+            onClick={onClick}
+          >
+            <StyledImg src={cancel} onClick={onCloseClick} />
+            {copy}
+            <br />
+            {anotherCopy}
+          </TextComponent>
         ))}
     </Transition>
   );

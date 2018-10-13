@@ -12,7 +12,7 @@ import { Color } from "../../Color";
 const WorkContainer = styled.div`
   color: ${darken(0.3, Color.TopColor)};
   padding: 20px;
-  position: absulote;
+  position: absolute;
   font-size: 1.5em;
   font-weight: 150;
   line-height: 1.4;
@@ -114,28 +114,23 @@ export const WorkBox = (props: WorkBoxProps) => {
     >
       {visible &&
         (({ scale, opacity }) => (
-          <>
-            <WorkContainer
-              style={{
-                opacity,
-                transform: `scale(${scale}, ${scale})`,
-              }}
-              onClick={onClick}
-            >
-              <Slider {...settings}>
-                <BadgesContainer name="Backend skills" badges={backendBadges} />
-                <BadgesContainer
-                  name="Frontend skills"
-                  badges={frontendBadges}
-                />
-                <BadgesContainer name="Databases" badges={dbBadges} />
-                <BadgesContainer name="UX/UI tools" badges={uxBadges} />
-                <BadgesContainer name="Other" badges={otherBadges} />
-              </Slider>
-              <StyledImg src={cancel} onClick={onCloseClick} />
-              <br />
-            </WorkContainer>
-          </>
+          <WorkContainer
+            style={{
+              opacity,
+              transform: `scale(${scale}, ${scale})`,
+            }}
+            onClick={onClick}
+          >
+            <Slider {...settings}>
+              <BadgesContainer name="Backend skills" badges={backendBadges} />
+              <BadgesContainer name="Frontend skills" badges={frontendBadges} />
+              <BadgesContainer name="Databases" badges={dbBadges} />
+              <BadgesContainer name="UX/UI tools" badges={uxBadges} />
+              <BadgesContainer name="Other" badges={otherBadges} />
+            </Slider>
+            <StyledImg src={cancel} onClick={onCloseClick} />
+            <br />
+          </WorkContainer>
         ))}
     </Transition>
   );

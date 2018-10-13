@@ -40,6 +40,7 @@ type State = {
   workVisible: boolean;
   menuVisible: boolean;
 };
+
 const defaultState = {
   coreVisible: false,
   loveVisible: false,

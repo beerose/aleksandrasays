@@ -8,15 +8,17 @@ import { cancel, dice } from "../../assets/svg";
 import { Color } from "../../Color";
 
 const whatILike = [
-  " tennis",
-  " climbing",
-  " reading books",
-  " binge watching netflix",
-  " art galleries",
-  " traveling",
-  " riding a bike",
-  " cooking",
-  " getting flowers",
+  "playing tennis",
+  "climbing",
+  "hiking",
+  "coofee",
+  "reading books",
+  "watching netflix",
+  "art galleries",
+  "traveling",
+  "riding a bike",
+  "cooking",
+  "flowers",
 ];
 
 const LoveContainer = styled.div`
@@ -73,7 +75,7 @@ const DiceContainer = styled.div`
 const TypedTitle = ({ text }: { text: string }) => (
   <StyledTitle>
     I really, really like
-    <Typist key={text}>{text}</Typist>
+    <Typist key={text}> {text}</Typist>
   </StyledTitle>
 );
 
