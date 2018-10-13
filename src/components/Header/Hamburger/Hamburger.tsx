@@ -57,7 +57,6 @@ class HamburgerMenu extends React.Component<Props, State> {
               alignItems: position === "right" ? "flex-end" : "flex-start",
               left: position === "left" ? "15px" : undefined,
               right: position === "right" ? "15px" : undefined,
-              pointerEvents: disabled ? "initial" : "none",
             }}
           >
             <HamburgerStripe

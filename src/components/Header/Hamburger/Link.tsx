@@ -1,10 +1,27 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { LinkProps } from "./HamburgerStripe";
+type LinkProps = {
+  linkTo: string;
+  style?: React.CSSProperties;
+  external?: boolean;
+  children?: React.ReactNode;
+  disabled?: boolean;
+};
+export const Link = ({
+  external,
+  linkTo,
+  disabled,
+  style: styleProp,
+  ...rest
+}: LinkProps) => {
+  const style: React.CSSProperties = {
+    ...styleProp,
+    pointerEvents: disabled ? "initial" : "none",
+  };
 
-export const Link = ({ external, linkTo, ...rest }: LinkProps) =>
-  external ? (
-    <a href={linkTo} target="__blank" {...rest} />
+  return external ? (
+    <a href={linkTo} target="__blank" style={style} {...rest} />
   ) : (
-    <RouterLink to={linkTo} {...rest} />
+    <RouterLink to={linkTo} style={style} {...rest} />
   );
+};
