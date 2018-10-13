@@ -1,38 +1,28 @@
 import { darken } from "polished";
 import React from "react";
-import { Link } from "react-router-dom";
 import { Transition } from "react-spring";
-import styled from "styled-components";
-import { Color } from "../../../Color";
+import styled, { css } from "styled-components";
+import { Link } from "./Link";
 
-const TopColorStyledHamburgerStripe = styled.div`
-  margin: 4px;
-  border-radius: 3px;
-  background: ${darken(0.2, Color.TopColor)};
-  width: 45px;
-  font-size: 25px;
-  height: 4px;
-  color: ${darken(0.2, Color.TopColor)};
-  text-align-last: right;
+type StripeProps = {
+  color: string;
+} & React.HTMLAttributes<HTMLDivElement>;
 
-  &:hover {
-    color: ${darken(0.3, Color.TopColor)};
-  }
-`;
-
-const BottomColorStyledHamburgerStripe = styled.div`
+const Stripe = styled.div`
   margin: 4px;
   border-radius: 2px;
-  background: ${darken(0.15, Color.BottomColor)};
-  width: 45px;
+  min-width: 45px;
   font-size: 25px;
   height: 4px;
-  color: ${darken(0.15, Color.BottomColor)};
   text-align-last: right;
 
-  &:hover {
-    color: ${darken(0.3, Color.BottomColor)};
-  }
+  ${({ color }: StripeProps) => css`
+    background: ${darken(0.15, color)};
+    color: ${darken(0.15, color)};
+    &:hover {
+      color: ${darken(0.3, color)};
+    }
+  `};
 `;
 
 const HamburgerText = ({
@@ -63,73 +53,56 @@ type Props = {
   disabled: boolean;
   external?: boolean;
 };
+
+export type LinkProps = {
+  linkTo: string;
+  style: React.CSSProperties;
+  external?: boolean;
+  children?: React.ReactNode;
+};
+
 export class HamburgerStripe extends React.Component<Props, {}> {
   public render() {
     const { disabled, text, external, linkTo, color } = this.props;
-    const Stripe =
-      color === Color.TopColor
-        ? TopColorStyledHamburgerStripe
-        : BottomColorStyledHamburgerStripe;
+
     return disabled ? (
-      <Stripe />
+      <Stripe color={color} />
     ) : (
-      <Transition
-        from={{
-          background: darken(0.2, color),
-          height: 5,
-          width: 50,
+      <Link
+        external={external}
+        linkTo={linkTo}
+        style={{
+          textDecoration: "none",
         }}
-        enter={{
-          background: "none",
-          border: `2.3px solid ${darken(0.2, color)}`,
-          height: 40,
-          padding: "10px 10px 0px 10px",
-          width: "fit-content",
-        }}
-        leave={{
-          background: darken(0.2, color),
-          height: 5,
-          width: 50,
-        }}
-        config={{ friction: 15, tension: 200 }}
       >
-        {!disabled &&
-          (({ height, width, background, border, padding }) =>
-            external ? (
-              <a
-                href={linkTo}
-                target={"_blank"}
-                style={{ textDecoration: "none" }}
+        <Transition
+          from={{
+            background: darken(0.2, color),
+            height: 5,
+          }}
+          enter={{
+            background: "none",
+            border: `2.3px solid ${darken(0.2, color)}`,
+            height: 40,
+            padding: "10px 10px 0px 10px",
+          }}
+          leave={{
+            background: darken(0.2, color),
+            height: 5,
+          }}
+          config={{ friction: 15, tension: 200 }}
+        >
+          {!disabled &&
+            (style => (
+              <Stripe
+                color={color}
+                style={{ ...style, pointerEvents: "initial" }}
               >
-                <Stripe
-                  color={color}
-                  style={{
-                    background,
-                    border,
-                    height,
-                    padding,
-                    width,
-                  }}
-                >
-                  <HamburgerText text={text} display={!disabled} delay={100} />
-                </Stripe>
-              </a>
-            ) : (
-              <Link to={linkTo} style={{ textDecoration: "none" }}>
-                <Stripe
-                  style={{
-                    background,
-                    border,
-                    height,
-                    padding,
-                    width,
-                  }}
-                >
-                  <HamburgerText text={text} display={!disabled} delay={100} />
-                </Stripe>
-              </Link>
+                <HamburgerText text={text} display={!disabled} delay={100} />
+              </Stripe>
             ))}
-      </Transition>
+        </Transition>
+      </Link>
     );
   }
 }

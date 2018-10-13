@@ -46,6 +46,7 @@ class HamburgerMenu extends React.Component<Props, State> {
     this.setState({ ...this.state, disabled: false });
   };
   public render() {
+    const { disabled } = this.state;
     const { color, position, visible } = this.props;
     return (
       <>
@@ -56,25 +57,26 @@ class HamburgerMenu extends React.Component<Props, State> {
               alignItems: position === "right" ? "flex-end" : "flex-start",
               left: position === "left" ? "15px" : undefined,
               right: position === "right" ? "15px" : undefined,
+              pointerEvents: disabled ? "initial" : "none",
             }}
           >
             <HamburgerStripe
               color={color}
               linkTo={"about"}
-              disabled={this.state.disabled}
+              disabled={disabled}
               text="About me"
             />
             <HamburgerStripe
               color={color}
               external={true}
               linkTo={"https://www.medium.com/@aleksandrasays"}
-              disabled={this.state.disabled}
+              disabled={disabled}
               text="Blog"
             />
             <HamburgerStripe
               color={color}
               linkTo={"contact"}
-              disabled={this.state.disabled}
+              disabled={disabled}
               text="Contact"
             />
           </HamburgerMenuContainer>

@@ -1,8 +1,7 @@
 {
-  "extends": "tslint:recommended",
+  "extends": ["tslint:latest", "tslint-config-prettier"],
   "rules": {
     "interface-over-type-literal": false,
-    "interface-name": false,
-    "semicolon": false
+    "interface-name": false
   }
 }
