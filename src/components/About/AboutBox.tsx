@@ -1,12 +1,12 @@
-import React, { AllHTMLAttributes, HTMLAttributes } from "react";
+import React, { AllHTMLAttributes } from "react";
 import styled from "styled-components";
 
 import { darken } from "polished";
 import { Transition } from "react-spring";
-import { Color } from "../Color";
+import { Color } from "../../Color";
 
 const CopyTitle = styled.div`
-  color: ${darken(0.1, Color.Pink)};
+  color: ${darken(0.1, Color.TopColor)};
   position: absulote;
   font-size: 4em;
   font-weight: 600;
@@ -15,7 +15,7 @@ const CopyTitle = styled.div`
   cursor: pointer;
 
   &:hover {
-    color: ${darken(0.15, Color.Pink)};
+    color: ${darken(0.15, Color.TopColor)};
   }
 `;
 

@@ -1,14 +1,16 @@
 import React, { AllHTMLAttributes } from "react";
 import styled from "styled-components";
 
+import { darken } from "polished";
 import { Color } from "../Color";
 import { Greeting } from "./Greeting";
+import { Header } from "./Header/Header";
 import { SocialIconsPanel } from "./SocialIcons";
 
 const SocialIconsContainer = styled.div`
-  position: fixed;
-  bottom: 5%;
-  right: 5%;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
 `;
 
 type Props = { greetingsVisible: boolean } & AllHTMLAttributes<HTMLDivElement>;
@@ -18,9 +20,12 @@ class MainPage extends React.Component<Props> {
     const { greetingsVisible } = this.props;
     return (
       <div style={{ position: "relative", height: "100%" }}>
-        <Greeting unmount={!greetingsVisible} color={Color.Blue} />
+        <Greeting visible={greetingsVisible} color={Color.BottomColor} />
         <SocialIconsContainer>
-          <SocialIconsPanel />
+          <SocialIconsPanel
+            color={darken(0.1, Color.BottomColor)}
+            visible={greetingsVisible}
+          />
         </SocialIconsContainer>
       </div>
     );

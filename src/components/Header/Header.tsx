@@ -1,31 +1,50 @@
 import React from "react";
-import styled from "styled-components";
-import { Arrow } from "./Arrow";
+
+import { darken } from "polished";
+import { Link } from "react-router-dom";
+import { Transition } from "react-spring";
+import { IconArrow } from "../Icons";
 import { Hamburger } from "./Hamburger";
+import { Color } from "../../Color";
 
-type Props = {
+export const Header = ({
+  visible,
+  color,
+  showArrow,
+}: {
+  visible: boolean;
   showArrow: boolean;
-};
-
-const HeaderContainer = styled.div`
-  position: absolute;
-  top: 0;
-  height: fit-content;
-  width: 94%;
-  padding-top: 3%;
-`;
-
-export class Header extends React.Component<Props, {}> {
-  public static defaultProps = {
-    showArrow: true,
-  };
-  public render() {
-    const { showArrow } = this.props;
-    return (
-      <HeaderContainer>
-        {showArrow && <Arrow />}
-        <Hamburger />
-      </HeaderContainer>
-    );
-  }
-}
+  color: string;
+}) => (
+  <Transition
+    from={{ opacity: 0, scale: 0 }}
+    enter={{ opacity: 1, scale: 1 }}
+    leave={{ opacity: 0, scale: 0 }}
+    config={{ friction: 10, tension: 70 }}
+    delay={0}
+  >
+    {visible &&
+      (({ opacity }) => (
+        <>
+          {showArrow && (
+            <Link
+              to={"/"}
+              style={{
+                left: "20px",
+                opacity,
+                position: "absolute",
+                top: "10px",
+              }}
+            >
+              <IconArrow color={darken(0.15, color)} />
+            </Link>
+          )}
+          <span
+            style={{ opacity: color === Color.BottomColor ? "1" : opacity }}
+          >
+            <Hamburger visible={true} color={color} />
+          </span>
+        </>
+      ))}
+  </Transition>
+);

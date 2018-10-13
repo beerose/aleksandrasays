@@ -1,16 +1,16 @@
-import React, { AllHTMLAttributes, HTMLAttributes } from "react";
+import React, { AllHTMLAttributes } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import styled from "styled-components";
 
-import { darken, lighten } from "polished";
-import { Spring, Transition } from "react-spring";
-import { cancel } from "../assets/svg";
-import { Color } from "../Color";
+import { darken } from "polished";
+import { Transition } from "react-spring";
+import { cancel } from "../../assets/svg";
+import { Color } from "../../Color";
 
 const WorkContainer = styled.div`
-  color: ${darken(0.3, Color.Pink)};
+  color: ${darken(0.3, Color.TopColor)};
   padding: 20px;
   position: absulote;
   font-size: 1.5em;
@@ -31,8 +31,8 @@ const StyledImg = styled("img")`
 `;
 
 const BadgeBox = styled.span`
-  color: ${darken(0.3, Color.Pink)};
-  border: 1px solid ${darken(0.3, Color.Pink)};
+  color: ${darken(0.3, Color.TopColor)};
+  border: 1px solid ${darken(0.3, Color.TopColor)};
   padding: 5px;
   font-size: 0.8em;
   font-weight: 120;

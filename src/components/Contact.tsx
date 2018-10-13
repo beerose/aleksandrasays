@@ -1,15 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
+import { darken } from "polished";
+import { Transition } from "react-spring";
+import { Color } from "../Color";
+import { Header } from "./Header/Header";
 import { SocialIconsPanel } from "./SocialIcons";
-import { Header } from "./Header";
 
 const email = "hello@aleksandrasays.com";
 
 const Container = styled.div`
-  position: fixed;
-  bottom: 45%;
-  font-size: 3em;
+  position: absolute;
+  color: ${darken(0.1, Color.BottomColor)};
+  bottom: 40%;
+  font-size: 3.5em;
   font-weight: 700;
   line-height: 1.4;
   width: 100%;
@@ -19,20 +23,31 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const SocialIconsContainer = styled.div`
-  position: absolute;
-  top: 60px;
-`;
-
-const Contact: React.SFC<{}> = () => (
+const Contact = ({ visible }: { visible: boolean }) => (
   <>
-    <Header />
-    <Container>
-      {email}
-      <SocialIconsContainer>
-        <SocialIconsPanel />
-      </SocialIconsContainer>
-    </Container>
+    <Transition
+      from={{ opacity: 0, scale: 0.9 }}
+      enter={{ scale: 1.1, opacity: 1 }}
+      leave={{ opacity: 0, scale: 0 }}
+      config={{ duration: 1000 }}
+      delay={visible ? 1000 : 0}
+    >
+      {visible &&
+        (({ scale, opacity }) => (
+          <Container
+            style={{ opacity, transform: `scale(${scale}, ${scale})` }}
+          >
+            {email}
+            <div>
+              <SocialIconsPanel
+                color={darken(0.1, Color.BottomColor)}
+                visible={visible}
+                delay={1000}
+              />
+            </div>
+          </Container>
+        ))}
+    </Transition>
   </>
 );
 

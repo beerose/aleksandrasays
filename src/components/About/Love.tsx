@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 import { darken } from "polished";
 import { Transition } from "react-spring";
-import { cancel, dice } from "../assets/svg";
-import { Color } from "../Color";
+import { cancel, dice } from "../../assets/svg";
+import { Color } from "../../Color";
 
 const whatILike = [
   " tennis",
@@ -20,7 +20,7 @@ const whatILike = [
 ];
 
 const LoveContainer = styled.div`
-  color: ${darken(0.3, Color.Pink)};
+  color: ${darken(0.3, Color.TopColor)};
   padding-top: 60px;
   position: absulote;
   font-size: 1.5em;
@@ -45,26 +45,35 @@ const StyledCancel = styled("img")`
 `;
 
 const StyledDice = styled("img")`
-  position: absolute;
-  bottom: 0;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
+  padding: 5px;
+
+  &:hover {
+    transform: scale(1.1, 1.1);
+  }
 `;
 
 const StyledTitle = styled.div`
   font-weight: 120;
   font-size: 1.5em;
-  margin-bottom: 15px;
+`;
+
+const DiceContainer = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  flex-direction: column;
+  bottom: 15px;
+
+  font-size: 15px;
 `;
 
 const TypedTitle = ({ text }: { text: string }) => (
   <StyledTitle>
     I really, really like
-    <Typist key={text}>
-      {text}
-      {/* <Typist.Backspace count={text.length} delay={200} /> */}
-    </Typist>
+    <Typist key={text}>{text}</Typist>
   </StyledTitle>
 );
 
@@ -103,8 +112,10 @@ export class LoveBox extends React.Component<LoveBoxProps, State> {
             >
               <TypedTitle text={this.state.iLike} />
               <StyledCancel src={cancel} onClick={onCloseClick} />
-              <StyledDice src={dice} onClick={this.onDiceClick.bind(this)} />
-              <br />
+              <DiceContainer>
+                <StyledDice src={dice} onClick={this.onDiceClick.bind(this)} />
+                Click me!
+              </DiceContainer>
             </LoveContainer>
           ))}
       </Transition>

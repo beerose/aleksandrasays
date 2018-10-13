@@ -1,10 +1,10 @@
-import React, { AllHTMLAttributes, HTMLAttributes } from "react";
+import React, { AllHTMLAttributes } from "react";
 import styled from "styled-components";
 
-import { darken, lighten } from "polished";
-import { Spring, Transition } from "react-spring";
-import { cancel } from "../assets/svg/";
-import { Color } from "../Color";
+import { darken } from "polished";
+import { Transition } from "react-spring";
+import { cancel } from "../../assets/svg";
+import { Color } from "../../Color";
 
 const copy = `My name is Aleksandra Sikora and I am a full-stack developer from Wrocław.
 I'm a functional programming enthusiast, constantly experimenting with new
@@ -18,8 +18,8 @@ which gave me a nice opportunity to learn how to stay extremely calm and patient
 `;
 
 const TextComponent = styled.div`
-  color: ${darken(0.3, Color.Pink)};
-  border: 1px solid ${darken(0.1, Color.Pink)};
+  color: ${darken(0.3, Color.TopColor)};
+  border: 1px solid ${darken(0.1, Color.TopColor)};
   padding: 20px;
   position: absulote;
   font-size: 1.5em;

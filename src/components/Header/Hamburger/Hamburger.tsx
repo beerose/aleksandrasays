@@ -11,45 +11,68 @@ type State = {
 const HamburgerMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   position: absolute;
   top: 30px;
-  right: 25px;
   cursor: pointer;
+  z-index: 1;
+
+  transition: all 10s ease-in;
 `;
 
 type Props = {
   visible: boolean;
+  color: string;
+  position: "left" | "right";
 };
 class HamburgerMenu extends React.Component<Props, State> {
+  public static defaultProps = {
+    position: "right",
+  };
   public state: State = {
     disabled: true,
   };
+
+  public componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.color !== this.props.color) {
+      this.setState({ disabled: true });
+    }
+  }
 
   public handleClickOutside = () => {
     this.setState({ ...this.state, disabled: true });
   };
 
+  public handleHamburgerClick = () => {
+    this.setState({ ...this.state, disabled: false });
+  };
   public render() {
-    const handleHamburgerClick = () => {
-      this.setState({ ...this.state, disabled: false });
-    };
+    const { color, position, visible } = this.props;
     return (
       <>
-        {this.props.visible && (
-          <HamburgerMenuContainer onClick={handleHamburgerClick}>
+        {visible && (
+          <HamburgerMenuContainer
+            onClick={this.handleHamburgerClick}
+            style={{
+              alignItems: position === "right" ? "flex-end" : "flex-start",
+              left: position === "left" ? "15px" : undefined,
+              right: position === "right" ? "15px" : undefined,
+            }}
+          >
             <HamburgerStripe
+              color={color}
               linkTo={"about"}
               disabled={this.state.disabled}
               text="About me"
             />
             <HamburgerStripe
+              color={color}
               external={true}
               linkTo={"https://www.medium.com/@aleksandrasays"}
               disabled={this.state.disabled}
               text="Blog"
             />
             <HamburgerStripe
+              color={color}
               linkTo={"contact"}
               disabled={this.state.disabled}
               text="Contact"

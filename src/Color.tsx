@@ -1,7 +1,7 @@
 export const enum Color {
-  Blue = "#004688",
-  Pink = "#FF1654",
-  DarkPink = "#950028",
+  BottomColor = "#cecece",
+
+  TopColor = "#FF1654",
   Orange = "#F4D35E",
   Egg = "#EBEBD3",
 }
@@ -12,8 +12,8 @@ if (process.env.NODE_ENV === "development") {
   // tslint:disable-next-line:no-unused-expression
   injectGlobal`
     :root {
-      --pink: ${Color.Pink};
-      --blue: ${Color.Blue};
+      --TopColor: ${Color.TopColor};
+      --BottomColor: ${Color.BottomColor};
     }
   `;
 }

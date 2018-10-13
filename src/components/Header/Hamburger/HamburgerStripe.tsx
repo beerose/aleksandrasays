@@ -5,32 +5,35 @@ import { Transition } from "react-spring";
 import styled from "styled-components";
 import { Color } from "../../../Color";
 
-type Props = {
-  text: string;
-  linkTo: string;
-  disabled: boolean;
-  external?: boolean;
-};
-
-const StyledHamburgerStripe = styled.div`
+const TopColorStyledHamburgerStripe = styled.div`
   margin: 4px;
   border-radius: 3px;
-  background: ${darken(0.25, Color.Pink)};
+  background: ${darken(0.2, Color.TopColor)};
   width: 45px;
   font-size: 25px;
   height: 4px;
-  color: ${darken(0.25, Color.Pink)};
+  color: ${darken(0.2, Color.TopColor)};
   text-align-last: right;
-`;
-// padding: 10px 10px 0px 10px;
 
-/* const styles = {
-  unrolled: tss({
-    height: 40,
-    width: "fit-content",
-  }),
-};
-*/
+  &:hover {
+    color: ${darken(0.3, Color.TopColor)};
+  }
+`;
+
+const BottomColorStyledHamburgerStripe = styled.div`
+  margin: 4px;
+  border-radius: 2px;
+  background: ${darken(0.15, Color.BottomColor)};
+  width: 45px;
+  font-size: 25px;
+  height: 4px;
+  color: ${darken(0.15, Color.BottomColor)};
+  text-align-last: right;
+
+  &:hover {
+    color: ${darken(0.3, Color.BottomColor)};
+  }
+`;
 
 const HamburgerText = ({
   text,
@@ -53,43 +56,53 @@ const HamburgerText = ({
   </Transition>
 );
 
+type Props = {
+  color: string;
+  text: string;
+  linkTo: string;
+  disabled: boolean;
+  external?: boolean;
+};
 export class HamburgerStripe extends React.Component<Props, {}> {
   public render() {
-    const { disabled, text, external, linkTo } = this.props;
+    const { disabled, text, external, linkTo, color } = this.props;
+    const Stripe =
+      color === Color.TopColor
+        ? TopColorStyledHamburgerStripe
+        : BottomColorStyledHamburgerStripe;
     return disabled ? (
-      <StyledHamburgerStripe />
+      <Stripe />
     ) : (
       <Transition
         from={{
-          background: darken(0.25, Color.Pink),
-          color: Color.Pink,
-          height: 2,
-          width: 30,
+          background: darken(0.2, color),
+          height: 5,
+          width: 50,
         }}
         enter={{
           background: "none",
-          border: `2.3px solid ${darken(0.25, Color.Pink)}`,
+          border: `2.3px solid ${darken(0.2, color)}`,
           height: 40,
           padding: "10px 10px 0px 10px",
           width: "fit-content",
         }}
         leave={{
-          background: darken(0.25, Color.Pink),
-          color: Color.Pink,
-          height: 2,
-          width: 30,
+          background: darken(0.2, color),
+          height: 5,
+          width: 50,
         }}
         config={{ friction: 15, tension: 200 }}
       >
         {!disabled &&
-          (({ height, width, background, border, padding, color }) =>
+          (({ height, width, background, border, padding }) =>
             external ? (
               <a
                 href={linkTo}
                 target={"_blank"}
                 style={{ textDecoration: "none" }}
               >
-                <StyledHamburgerStripe
+                <Stripe
+                  color={color}
                   style={{
                     background,
                     border,
@@ -99,11 +112,11 @@ export class HamburgerStripe extends React.Component<Props, {}> {
                   }}
                 >
                   <HamburgerText text={text} display={!disabled} delay={100} />
-                </StyledHamburgerStripe>
+                </Stripe>
               </a>
             ) : (
               <Link to={linkTo} style={{ textDecoration: "none" }}>
-                <StyledHamburgerStripe
+                <Stripe
                   style={{
                     background,
                     border,
@@ -113,7 +126,7 @@ export class HamburgerStripe extends React.Component<Props, {}> {
                   }}
                 >
                   <HamburgerText text={text} display={!disabled} delay={100} />
-                </StyledHamburgerStripe>
+                </Stripe>
               </Link>
             ))}
       </Transition>

@@ -7,26 +7,29 @@ import {
 import { Spring } from "react-spring";
 import styled from "styled-components";
 
+import { lighten } from "polished";
 import { Color } from "./Color";
-import { About, MainPage } from "./components/";
-import { Header } from "./components/Header";
+import { About, Contact, MainPage } from "./components/";
+import { Header } from "./components/Header/Header";
 
 // background-image: url(${img});
 const Content = styled.div`
-  background-color: #004688;
+  background-color: ${lighten(0.1, Color.BottomColor)};
   width: 100%;
   height: 100%;
 `;
 // #4b68c1
-// #3653ab
+// #002c55
 
 // const ORANGE_INACTIVE = "M1000,10000 L400,-100 L0,380 Z";
-const PINK_INACTIVE = "M0,0 L1,0 L0,1 Z";
-const PINK_ACTIVE = "M0,0 L2,0 L0,2 Z";
+const TOP_COLOR_INACTIVE = "M0,0 L0.7,0 L0,1.3 Z";
+const TOP_COLOR_ACTIVE = "M0,0 L1.7,0 L0,1.6 Z";
+const TOP_COLOR_HIDEN = "M0,0, L-0.1,-0.1 L0,2 Z";
 
 const initialState = {
+  aboutVisible: false,
+  contactVisible: false,
   greetingsVisible: false,
-  mountAbout: false,
 };
 
 type MainProps = RouteComponentProps<any>;
@@ -38,16 +41,24 @@ export class Main extends React.Component<MainProps, State> {
     switch (this.props.location.pathname) {
       case "/":
         this.setState({
+          aboutVisible: false,
+          contactVisible: false,
           greetingsVisible: true,
-          mountAbout: false,
         });
         return;
       case "/about":
         this.setState({
+          aboutVisible: true,
+          contactVisible: false,
           greetingsVisible: false,
-          mountAbout: true,
         });
         return;
+      case "/contact":
+        this.setState({
+          aboutVisible: false,
+          contactVisible: true,
+          greetingsVisible: false,
+        });
     }
   }
 
@@ -58,16 +69,24 @@ export class Main extends React.Component<MainProps, State> {
     switch (nextProps.location.pathname) {
       case "/":
         this.setState({
+          aboutVisible: false,
+          contactVisible: false,
           greetingsVisible: true,
-          mountAbout: false,
         });
         return;
       case "/about":
         this.setState({
+          aboutVisible: true,
+          contactVisible: false,
           greetingsVisible: false,
-          mountAbout: true,
         });
         return;
+      case "/contact":
+        this.setState({
+          aboutVisible: false,
+          contactVisible: true,
+          greetingsVisible: false,
+        });
     }
   }
 
@@ -76,7 +95,7 @@ export class Main extends React.Component<MainProps, State> {
       location: { pathname },
     } = this.props;
 
-    const { greetingsVisible, mountAbout } = this.state;
+    const { greetingsVisible, aboutVisible, contactVisible } = this.state;
 
     return (
       <>
@@ -97,20 +116,36 @@ export class Main extends React.Component<MainProps, State> {
               tension: 100,
             }}
             to={{
-              pinkPath: pathname === "/about" ? PINK_ACTIVE : PINK_INACTIVE,
+              TopColorPath:
+                pathname === "/"
+                  ? TOP_COLOR_INACTIVE
+                  : pathname === "/about"
+                    ? TOP_COLOR_ACTIVE
+                    : TOP_COLOR_HIDEN,
             }}
-            delay={greetingsVisible ? 500 : 0}
+            delay={greetingsVisible ? 400 : 0}
           >
-            {({ pinkPath }) => (
-              <clipPath id="pink-clip-path" clipPathUnits="objectBoundingBox">
-                <path fill={Color.Pink} d={pinkPath} />
+            {({ TopColorPath }) => (
+              <clipPath
+                id="top-color-clip-path"
+                clipPathUnits="objectBoundingBox"
+              >
+                <path fill={Color.TopColor} d={TopColorPath} />
               </clipPath>
             )}
           </Spring>
         </svg>
-        <MainPage greetingsVisible={this.state.greetingsVisible} />
-        <About greetingsVisible={greetingsVisible} mountAbout={mountAbout} />
-        {/* <Contact /> */}
+        <MainPage greetingsVisible={greetingsVisible} />
+        <About
+          greetingsVisible={greetingsVisible}
+          aboutVisible={aboutVisible}
+        />
+        <Header
+          showArrow={pathname !== "/"}
+          visible={true}
+          color={pathname === "/about" ? Color.TopColor : Color.BottomColor}
+        />
+        <Contact visible={contactVisible} />
       </>
     );
   }
