@@ -8,7 +8,7 @@ const email = "hello@aleksandrasays.com";
 
 const Container = styled.div`
   position: absolute;
-  color: ${Color.SemiTransparentBlack};
+  color: ${Color.PrimaryColor};
   bottom: 40%;
   font-size: 3.5em;
   font-weight: 700;

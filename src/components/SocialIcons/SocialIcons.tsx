@@ -1,19 +1,13 @@
 import React from "react";
 
-import {
-  IconGithub,
-  IconInstagram,
-  IconLinkedin,
-  IconTwitter,
-} from "../Icons/";
+import { IconGithub, IconInstagram, IconLinkedin, IconTwitter } from "../Icons";
 import { SocialIcon } from "./SocialIcon";
 
 type SocialIconsPanelProps = {
   color: string;
-  visible: boolean;
   delay?: number;
 };
-class SocialIconsPanel extends React.Component<SocialIconsPanelProps> {
+class SocialIcons extends React.Component<SocialIconsPanelProps> {
   public render() {
     return (
       <>
@@ -36,4 +30,4 @@ class SocialIconsPanel extends React.Component<SocialIconsPanelProps> {
   }
 }
 
-export default SocialIconsPanel;
+export default SocialIcons;

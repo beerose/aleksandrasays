@@ -34,19 +34,19 @@ type Props = {
   aboutVisible: boolean;
 } & AllHTMLAttributes<HTMLDivElement>;
 
-type State = {
-  coreVisible: boolean;
-  loveVisible: boolean;
-  workVisible: boolean;
-  menuVisible: boolean;
-};
+const enum AboutSection {
+  Core = "/core",
+  Love = "/love",
+  Work = "/work",
+  Menu = "/",
+}
 
 const defaultState = {
-  coreVisible: false,
-  loveVisible: false,
-  menuVisible: true,
-  workVisible: false,
+  currentSection: AboutSection.Menu,
 };
+
+type State = typeof defaultState;
+
 export default class About extends React.Component<Props, State> {
   public state = defaultState;
 
@@ -57,25 +57,25 @@ export default class About extends React.Component<Props, State> {
   }
   public render() {
     const { aboutVisible } = this.props;
-    const { menuVisible, coreVisible, loveVisible, workVisible } = this.state;
+    const { currentSection } = this.state;
 
     return (
       <AboutContainer {...this.props}>
         <CopyContainer>
           <CoreBox
-            visible={coreVisible && aboutVisible}
+            visible={currentSection === AboutSection.Core}
             onCloseClick={this.handleCloseBoxClick}
           />
           <WorkBox
-            visible={workVisible && aboutVisible}
+            visible={currentSection === AboutSection.Work}
             onCloseClick={this.handleCloseBoxClick}
           />
           <LoveBox
-            visible={loveVisible && aboutVisible}
+            visible={currentSection === AboutSection.Love}
             onCloseClick={this.handleCloseBoxClick}
           />
         </CopyContainer>
-        {menuVisible && (
+        {currentSection === AboutSection.Menu && (
           <MenuContainer>
             <CopyBox
               shouldMount={aboutVisible}
@@ -86,7 +86,7 @@ export default class About extends React.Component<Props, State> {
             <CopyBox
               shouldMount={aboutVisible}
               title={"Love"}
-              onClick={this.handleLoveCLick}
+              onClick={this.handleLoveClick}
               delay={aboutVisible ? 800 : 0}
             />
             <CopyBox
@@ -101,19 +101,24 @@ export default class About extends React.Component<Props, State> {
     );
   }
 
-  private handleLoveCLick = () => {
-    this.setState({ loveVisible: true, menuVisible: false });
+  private goToSection(section: AboutSection) {
+    // history push mby?
+    this.setState({ currentSection: section });
+  }
+
+  private handleLoveClick = () => {
+    this.goToSection(AboutSection.Love);
   };
 
   private handleWorkClick = () => {
-    this.setState({ workVisible: true, menuVisible: false });
+    this.goToSection(AboutSection.Work);
   };
 
   private handleCoreClick = () => {
-    this.setState({ coreVisible: true, menuVisible: false });
+    this.goToSection(AboutSection.Core);
   };
 
   private handleCloseBoxClick = () => {
-    this.setState({ ...defaultState });
+    this.goToSection(AboutSection.Menu);
   };
 }

@@ -2,7 +2,6 @@ import React, { AllHTMLAttributes } from "react";
 import Typist from "react-typist";
 import styled from "styled-components";
 
-import { darken } from "polished";
 import { Transition } from "react-spring";
 import { cancel, dice } from "../../assets/svg";
 import { Color } from "../../Color";
@@ -22,7 +21,7 @@ const whatILike = [
 ];
 
 const LoveContainer = styled.div`
-  color: ${darken(0.3, Color.TopColor)};
+  color: ${Color.DarkPrimaryColor};
   padding-top: 60px;
   position: absulote;
   font-size: 1.5em;

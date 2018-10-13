@@ -7,31 +7,31 @@ import {
 import { Spring } from "react-spring";
 import styled from "styled-components";
 
-import { lighten, rgba, darken } from "polished";
 import { Color } from "./Color";
 import { About, Contact } from "./components/";
 import { Header } from "./components/Header/Header";
 import { Greeting } from "./components/Greeting";
-import { SocialIconsPanel } from "./components/SocialIcons";
+import { SocialIcons } from "./components/SocialIcons";
 
-// background-image: url(${img});
 const Content = styled.div`
-  background-color: ${lighten(0.1, Color.BottomColor)};
+  background-color: ${Color.BottomColor};
   width: 100%;
   height: 100%;
 `;
-// #4b68c1
-// #002c55
 
-// const ORANGE_INACTIVE = "M1000,10000 L400,-100 L0,380 Z";
 const TOP_COLOR_INACTIVE = "M0,0 L0.7,0 L0,1.3 Z";
 const TOP_COLOR_ACTIVE = "M0,0 L1.7,0 L0,1.6 Z";
 const TOP_COLOR_HIDEN = "M0,0, L-0.1,-0.1 L0,2 Z";
 
+const enum AppSection {
+  About = "/about",
+  Contact = "/contact",
+  Main = "/",
+  None = "",
+}
+
 const initialState = {
-  aboutVisible: false,
-  contactVisible: false,
-  greetingsVisible: false,
+  currentSection: AppSection.None,
 };
 
 const SocialIconsContainer = styled.div`
@@ -49,23 +49,17 @@ export class Main extends React.Component<MainProps, State> {
     switch (this.props.location.pathname) {
       case "/":
         this.setState({
-          aboutVisible: false,
-          contactVisible: false,
-          greetingsVisible: true,
+          currentSection: AppSection.Main,
         });
         return;
       case "/about":
         this.setState({
-          aboutVisible: true,
-          contactVisible: false,
-          greetingsVisible: false,
+          currentSection: AppSection.About,
         });
         return;
       case "/contact":
         this.setState({
-          aboutVisible: false,
-          contactVisible: true,
-          greetingsVisible: false,
+          currentSection: AppSection.Contact,
         });
     }
   }
@@ -77,23 +71,17 @@ export class Main extends React.Component<MainProps, State> {
     switch (nextProps.location.pathname) {
       case "/":
         this.setState({
-          aboutVisible: false,
-          contactVisible: false,
-          greetingsVisible: true,
+          currentSection: AppSection.Main,
         });
         return;
       case "/about":
         this.setState({
-          aboutVisible: true,
-          contactVisible: false,
-          greetingsVisible: false,
+          currentSection: AppSection.About,
         });
         return;
       case "/contact":
         this.setState({
-          aboutVisible: false,
-          contactVisible: true,
-          greetingsVisible: false,
+          currentSection: AppSection.Contact,
         });
     }
   }
@@ -103,7 +91,7 @@ export class Main extends React.Component<MainProps, State> {
       location: { pathname },
     } = this.props;
 
-    const { greetingsVisible, aboutVisible, contactVisible } = this.state;
+    const { currentSection } = this.state;
 
     return (
       <>
@@ -131,7 +119,7 @@ export class Main extends React.Component<MainProps, State> {
                     ? TOP_COLOR_ACTIVE
                     : TOP_COLOR_HIDEN,
             }}
-            delay={greetingsVisible ? 400 : 0}
+            delay={currentSection === AppSection.Main ? 400 : 0}
           >
             {({ TopColorPath }) => (
               <clipPath
@@ -143,20 +131,13 @@ export class Main extends React.Component<MainProps, State> {
             )}
           </Spring>
         </svg>
-        <About aboutVisible={aboutVisible} />
+        <About aboutVisible={currentSection === AppSection.About} />
         <SocialIconsContainer>
-          <SocialIconsPanel
-            color={"rgba(0, 0, 0, 0.25)"}
-            visible={greetingsVisible}
-          />
+          <SocialIcons color={Color.PrimaryColor} />
         </SocialIconsContainer>
-        <Greeting visible={greetingsVisible} color={"rgba(0, 0, 0, 0.25)"} />
-        <Header
-          showArrow={pathname !== "/"}
-          visible={true}
-          color={"rgba(0,0,0,0.25)"}
-        />
-        <Contact visible={contactVisible} />
+        <Greeting visible={currentSection === AppSection.Main} />
+        <Header showArrow={pathname !== "/"} />
+        <Contact visible={currentSection === AppSection.Contact} />
       </>
     );
   }

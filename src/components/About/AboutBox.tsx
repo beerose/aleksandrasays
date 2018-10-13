@@ -5,7 +5,7 @@ import { Transition } from "react-spring";
 import { Color } from "../../Color";
 
 const CopyTitle = styled.div`
-  color: ${Color.SemiTransparentBlack};
+  color: ${Color.PrimaryColor};
   position: absulote;
   font-size: 4em;
   font-weight: 600;
@@ -14,7 +14,7 @@ const CopyTitle = styled.div`
   cursor: pointer;
 
   &:hover {
-    color: ${Color.NotSoTransparentBlack};
+    color: ${Color.DarkPrimaryColor};
   }
 `;
 

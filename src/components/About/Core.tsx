@@ -17,8 +17,8 @@ which gave me a nice opportunity to learn how to stay extremely calm and patient
 `;
 
 const TextComponent = styled.div`
-  color: ${Color.SemiTransparentBlack};
-  border: 1px solid ${Color.SemiTransparentBlack};
+  color: ${Color.PrimaryColor};
+  border: 1px solid ${Color.PrimaryColor};
   padding: 20px;
   position: absolute;
   font-size: 1.5em;

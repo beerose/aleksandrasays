@@ -4,13 +4,12 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import styled from "styled-components";
 
-import { darken } from "polished";
 import { Transition } from "react-spring";
 import { cancel } from "../../assets/svg";
 import { Color } from "../../Color";
 
 const WorkContainer = styled.div`
-  color: ${darken(0.3, Color.TopColor)};
+  color: ${Color.DarkPrimaryColor};
   padding: 20px;
   position: absolute;
   font-size: 1.5em;
@@ -31,8 +30,7 @@ const StyledImg = styled("img")`
 `;
 
 const BadgeBox = styled.span`
-  color: ${darken(0.3, Color.TopColor)};
-  border: 1px solid ${darken(0.3, Color.TopColor)};
+  border: 1px solid ${Color.DarkPrimaryColor};
   padding: 5px;
   font-size: 0.8em;
   font-weight: 120;

@@ -21,8 +21,6 @@ const HamburgerMenuContainer = styled.div`
 
 type Props = {
   visible: boolean;
-  color: string;
-  position: "left" | "right";
 };
 class HamburgerMenu extends React.Component<Props, State> {
   public static defaultProps = {
@@ -31,12 +29,6 @@ class HamburgerMenu extends React.Component<Props, State> {
   public state: State = {
     disabled: true,
   };
-
-  public componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.color !== this.props.color) {
-      this.setState({ disabled: true });
-    }
-  }
 
   public handleClickOutside = () => {
     this.setState({ ...this.state, disabled: true });
@@ -47,41 +39,28 @@ class HamburgerMenu extends React.Component<Props, State> {
   };
   public render() {
     const { disabled } = this.state;
-    const { color, position, visible } = this.props;
     return (
-      <>
-        {visible && (
-          <HamburgerMenuContainer
-            onClick={this.handleHamburgerClick}
-            style={{
-              alignItems: position === "right" ? "flex-end" : "flex-start",
-              left: position === "left" ? "15px" : undefined,
-              right: position === "right" ? "15px" : undefined,
-              pointerEvents: disabled ? "initial" : "none",
-            }}
-          >
-            <HamburgerStripe
-              color={color}
-              linkTo={"about"}
-              disabled={disabled}
-              text="About me"
-            />
-            <HamburgerStripe
-              color={color}
-              external={true}
-              linkTo={"https://www.medium.com/@aleksandrasays"}
-              disabled={disabled}
-              text="Blog"
-            />
-            <HamburgerStripe
-              color={color}
-              linkTo={"contact"}
-              disabled={disabled}
-              text="Contact"
-            />
-          </HamburgerMenuContainer>
-        )}
-      </>
+      <HamburgerMenuContainer
+        onClick={this.handleHamburgerClick}
+        style={{
+          alignItems: "flex-end",
+          right: "15px",
+          pointerEvents: disabled ? "initial" : "none",
+        }}
+      >
+        <HamburgerStripe linkTo={"about"} disabled={disabled} text="About me" />
+        <HamburgerStripe
+          external={true}
+          linkTo={"https://www.medium.com/@aleksandrasays"}
+          disabled={disabled}
+          text="Blog"
+        />
+        <HamburgerStripe
+          linkTo={"contact"}
+          disabled={disabled}
+          text="Contact"
+        />
+      </HamburgerMenuContainer>
     );
   }
 }

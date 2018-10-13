@@ -1,10 +1,9 @@
 export const enum Color {
-  BottomColor = "#cecece",
+  BottomColor = "#e8e8e8",
   TopColor = "#FF1654",
-  Orange = "#F4D35E",
-  Egg = "#EBEBD3",
-  SemiTransparentBlack = "rgba(0,0,0,0.25)",
-  NotSoTransparentBlack = "rgba(0,0,0,0.5)",
+  PrimaryColor = "rgba(0,0,0,0.2)",
+  LightPrimaryColor = "rgba(0,0,0,0.1)",
+  DarkPrimaryColor = "rgba(0,0,0,0.4)",
 }
 
 if (process.env.NODE_ENV === "development") {
