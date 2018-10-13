@@ -25,8 +25,14 @@ const Stripe = styled.div`
     color: ${Color.DarkPrimaryColor};
   }
 
-  @media (max-device-width: 650px) {
-    --size: 14px;
+  @media (max-device-width: 690px) {
+    --size: 8px;
+  }
+  @media (max-device-width: 580px) {
+    --size: 10px;
+  }
+  @media (max-device-width: 480px) {
+    --size: 12px;
   }
 `;
 
