@@ -143,13 +143,13 @@ export class Main extends React.Component<MainProps, State> {
             )}
           </Spring>
         </svg>
+        <About aboutVisible={aboutVisible} />
         <SocialIconsContainer>
           <SocialIconsPanel
             color={"rgba(0, 0, 0, 0.25)"}
             visible={greetingsVisible}
           />
         </SocialIconsContainer>
-        <About aboutVisible={aboutVisible} />
         <Greeting visible={greetingsVisible} color={"rgba(0, 0, 0, 0.25)"} />
         <Header
           showArrow={pathname !== "/"}
