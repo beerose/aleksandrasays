@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "homepage": "http://blackdahila.github.io/aleksandrasays",
+  "homepage": "http://blackdahila.github.io/",
   "scripts": {
-    "build": "parcel build src/index.html",
-    "predeploy": "yarn build",
+    "start": "parcel index.html",
+    "predeploy": "rm -rf dist && parcel build index.html",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
