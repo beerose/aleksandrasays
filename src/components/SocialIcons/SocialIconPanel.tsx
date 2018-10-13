@@ -18,18 +18,18 @@ class SocialIconsPanel extends React.Component<SocialIconsPanelProps> {
     return (
       <>
         <SocialIcon linkTo={"https://www.github.com/blackdahila"}>
-          <IconGithub color={this.props.color} width={"33px"} />
+          <IconGithub color={this.props.color} width="33px" />
         </SocialIcon>
         <SocialIcon linkTo={"https://www.twitter.com/aleksandrasays"}>
-          <IconTwitter color={this.props.color} width={"37px"} />
+          <IconTwitter color={this.props.color} width="37px" />
         </SocialIcon>
         <SocialIcon linkTo={"https://www.instagram.com/poczekajnamnie"}>
-          <IconInstagram color={this.props.color} width={"33px"} />
+          <IconInstagram color={this.props.color} width="33px" />
         </SocialIcon>
         <SocialIcon
           linkTo={"https://www.linkedin.com/in/aleksandra-sikora-b54699132/"}
         >
-          <IconLinkedin color={this.props.color} width={"31px"} />
+          <IconLinkedin color={this.props.color} width="31px" />
         </SocialIcon>
       </>
     );

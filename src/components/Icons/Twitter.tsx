@@ -1,12 +1,5 @@
-import { darken } from "polished";
 import React from "react";
-import styled from "styled-components";
-
-const StyledSvg = styled.svg`
-  &:hover {
-    fill: ${props => darken(0.1, props.fill || "")};
-  }
-`;
+import { StyledSvg } from "./StyledSvg";
 export const IconTwitter = ({
   color,
   width,

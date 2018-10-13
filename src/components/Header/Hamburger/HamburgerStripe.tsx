@@ -3,6 +3,7 @@ import React from "react";
 import { Transition } from "react-spring";
 import styled, { css } from "styled-components";
 import { Link } from "./Link";
+import { Color } from "../../../Color";
 
 type StripeProps = {
   color: string;
@@ -20,7 +21,7 @@ const Stripe = styled.div`
     background: ${darken(0.15, color)};
     color: ${darken(0.15, color)};
     &:hover {
-      color: ${darken(0.3, color)};
+      color: ${Color.NotSoTransparentBlack};
     }
   `};
 `;

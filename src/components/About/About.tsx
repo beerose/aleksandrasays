@@ -2,9 +2,7 @@ import React, { AllHTMLAttributes } from "react";
 import styled from "styled-components";
 
 import { Color } from "../../Color";
-import { Greeting } from "../Greeting";
 
-import { Header } from "../Header/Header";
 import TopColorClippedLayer from "../TopColorClippedLayer";
 import { CopyBox } from "./AboutBox";
 import { CoreBox } from "./Core";
@@ -33,7 +31,6 @@ const AboutContainer = styled(TopColorClippedLayer)`
 `;
 
 type Props = {
-  greetingsVisible: boolean;
   aboutVisible: boolean;
 } & AllHTMLAttributes<HTMLDivElement>;
 
@@ -58,12 +55,11 @@ export default class About extends React.Component<Props, State> {
     }
   }
   public render() {
-    const { greetingsVisible, aboutVisible } = this.props;
+    const { aboutVisible } = this.props;
     const { menuVisible, coreVisible, loveVisible, workVisible } = this.state;
 
     return (
       <AboutContainer {...this.props}>
-        <Greeting visible={greetingsVisible} color={Color.TopColor} />
         <CopyContainer>
           <CoreBox
             visible={coreVisible && aboutVisible}

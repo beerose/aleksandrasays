@@ -7,10 +7,12 @@ import {
 import { Spring } from "react-spring";
 import styled from "styled-components";
 
-import { lighten } from "polished";
+import { lighten, rgba, darken } from "polished";
 import { Color } from "./Color";
-import { About, Contact, MainPage } from "./components/";
+import { About, Contact } from "./components/";
 import { Header } from "./components/Header/Header";
+import { Greeting } from "./components/Greeting";
+import { SocialIconsPanel } from "./components/SocialIcons";
 
 // background-image: url(${img});
 const Content = styled.div`
@@ -31,6 +33,12 @@ const initialState = {
   contactVisible: false,
   greetingsVisible: false,
 };
+
+const SocialIconsContainer = styled.div`
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+`;
 
 type MainProps = RouteComponentProps<any>;
 type State = typeof initialState;
@@ -135,15 +143,18 @@ export class Main extends React.Component<MainProps, State> {
             )}
           </Spring>
         </svg>
-        <MainPage greetingsVisible={greetingsVisible} />
-        <About
-          greetingsVisible={greetingsVisible}
-          aboutVisible={aboutVisible}
-        />
+        <SocialIconsContainer>
+          <SocialIconsPanel
+            color={"rgba(0, 0, 0, 0.25)"}
+            visible={greetingsVisible}
+          />
+        </SocialIconsContainer>
+        <About aboutVisible={aboutVisible} />
+        <Greeting visible={greetingsVisible} color={"rgba(0, 0, 0, 0.25)"} />
         <Header
           showArrow={pathname !== "/"}
           visible={true}
-          color={pathname === "/about" ? Color.TopColor : Color.BottomColor}
+          color={"rgba(0,0,0,0.25)"}
         />
         <Contact visible={contactVisible} />
       </>
