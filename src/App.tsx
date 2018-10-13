@@ -20,7 +20,7 @@ const Content = styled.div`
 `;
 
 const TOP_COLOR_INACTIVE = "M0,0 L0.7,0 L0,1.3 Z";
-const TOP_COLOR_ACTIVE = "M0,0 L1.7,0 L0,1.6 Z";
+const TOP_COLOR_ACTIVE = "M0,0 L2,0 L0,1.2 Z";
 const TOP_COLOR_HIDEN = "M0,0, L-0.1,-0.1 L0,2 Z";
 
 const enum AppSection {
@@ -122,12 +122,7 @@ export class Main extends React.Component<MainProps, State> {
             delay={currentSection === AppSection.Main ? 400 : 0}
           >
             {({ TopColorPath }) => (
-              <clipPath
-                id="top-color-clip-path"
-                clipPathUnits="objectBoundingBox"
-              >
-                <path fill={Color.TopColor} d={TopColorPath} />
-              </clipPath>
+              <path fill={Color.TopColor} d={TopColorPath} />
             )}
           </Spring>
         </svg>

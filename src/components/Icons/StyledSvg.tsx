@@ -10,8 +10,8 @@ export const StyledSvg = styled.svg`
     margin: 10px;
   }
   @media (max-device-width: 580px) {
-    transform: scale(2.2, 2.2);
-    margin: 20px;
+    transform: scale(2, 2);
+    margin: 15px;
   }
   @media (max-device-width: 480px) {
     transform: scale(2.2, 2.2);

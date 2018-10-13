@@ -1,9 +1,6 @@
 import React, { AllHTMLAttributes } from "react";
 import styled from "styled-components";
 
-import { Color } from "../../Color";
-
-import TopColorClippedLayer from "../TopColorClippedLayer";
 import { CopyBox } from "./AboutBox";
 import { CoreBox } from "./Core";
 import { LoveBox } from "./Love";
@@ -25,8 +22,7 @@ const CopyContainer = styled.div`
   position: absolute;
 `;
 
-const AboutContainer = styled(TopColorClippedLayer)`
-  background: ${Color.TopColor};
+const AboutContainer = styled.div`
   display: flex;
 `;
 
