@@ -133,7 +133,7 @@ export class Main extends React.Component<MainProps, State> {
         </svg>
         <About aboutVisible={currentSection === AppSection.About} />
         <SocialIconsContainer>
-          <SocialIcons color={Color.PrimaryColor} />
+          <SocialIcons />
         </SocialIconsContainer>
         <Greeting visible={currentSection === AppSection.Main} />
         <Header showArrow={pathname !== "/"} />

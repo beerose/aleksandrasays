@@ -7,7 +7,7 @@ import TopColorClippedLayer from "../TopColorClippedLayer";
 import { CopyBox } from "./AboutBox";
 import { CoreBox } from "./Core";
 import { LoveBox } from "./Love";
-import { WorkBox } from "./Work";
+import { SkillsBox } from "./Skills";
 
 const MenuContainer = styled.div`
   width: 100%;
@@ -66,7 +66,7 @@ export default class About extends React.Component<Props, State> {
             visible={currentSection === AboutSection.Core}
             onCloseClick={this.handleCloseBoxClick}
           />
-          <WorkBox
+          <SkillsBox
             visible={currentSection === AboutSection.Work}
             onCloseClick={this.handleCloseBoxClick}
           />

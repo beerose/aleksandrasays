@@ -7,26 +7,23 @@ import styled from "styled-components";
 import { Transition } from "react-spring";
 import { cancel } from "../../assets/svg";
 import { Color } from "../../Color";
+import { StyledCancel } from "./StyledCancel";
 
-const WorkContainer = styled.div`
+const SkillsContainer = styled.div`
   color: ${Color.DarkPrimaryColor};
   padding: 20px;
   position: absolute;
-  font-size: 1.5em;
-  font-weight: 150;
-  line-height: 1.4;
-  border-radius: 1px;
   max-width: 40%;
-`;
 
-const StyledImg = styled("img")`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 20px;
-  height: 20px;
-  transform: translate3d(10px, -10px, 0);
-  cursor: pointer;
+  @media (max-device-width: 650px) {
+    max-width: 50%;
+  }
+  @media (max-device-width: 580px) {
+    max-width: 60%;
+  }
+  @media (max-device-width: 480px) {
+    max-width: 70%;
+  }
 `;
 
 const BadgeBox = styled.span`
@@ -35,25 +32,42 @@ const BadgeBox = styled.span`
   font-size: 0.8em;
   font-weight: 120;
   line-height: 1.4;
-  margin: 5px;
+  margin: 5px 5px 0 0;
+
+  @media (max-device-width: 650px) {
+    font-size: 30px;
+  }
+  @media (max-device-width: 580px) {
+    font-size: 35px;
+  }
+  @media (max-device-width: 480px) {
+    font-size: 40px;
+  }
 `;
 
 const StyledBadgesContainer = styled.div`
   display: flex;
-  max-width: 90%;
   flex-wrap: wrap;
+  margin-top: 15px;
 `;
 
-const WorkBoxContainer = styled.div`
+const SkillsBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 30px;
-`;
-
-const WorkBoxTitle = styled.span`
+  font-size: 1.6em;
   font-weight: 150;
-  font-size: 1.5em;
-  margin-bottom: 15px;
+  line-height: 1.4;
+
+  @media (max-device-width: 650px) {
+    font-size: 40px;
+  }
+  @media (max-device-width: 580px) {
+    font-size: 45px;
+  }
+  @media (max-device-width: 480px) {
+    font-size: 50px;
+  }
 `;
 
 const BadgesContainer = ({
@@ -63,14 +77,14 @@ const BadgesContainer = ({
   badges: string[];
   name: string;
 }) => (
-  <WorkBoxContainer>
-    <WorkBoxTitle>{name}</WorkBoxTitle>
+  <SkillsBoxContainer>
+    {name}
     <StyledBadgesContainer>
       {badges.map((badge: string) => (
-        <BadgeBox>{badge}</BadgeBox>
+        <BadgeBox key={badge}>{badge}</BadgeBox>
       ))}
     </StyledBadgesContainer>
-  </WorkBoxContainer>
+  </SkillsBoxContainer>
 );
 
 const backendBadges = [
@@ -90,11 +104,11 @@ const uxBadges = ["Figma", "FramerX", "After Effects", "Adobe Illustrator"];
 
 const otherBadges = ["git", "circle-ci", "jenkins", "jira"];
 
-type WorkBoxProps = {
+type SkillsBoxProps = {
   onCloseClick: () => void;
   visible: boolean;
 } & AllHTMLAttributes<HTMLDivElement>;
-export const WorkBox = (props: WorkBoxProps) => {
+export const SkillsBox = (props: SkillsBoxProps) => {
   const { onCloseClick, visible, onClick } = props;
   const settings = {
     arrows: true,
@@ -112,7 +126,7 @@ export const WorkBox = (props: WorkBoxProps) => {
     >
       {visible &&
         (({ scale, opacity }) => (
-          <WorkContainer
+          <SkillsContainer
             style={{
               opacity,
               transform: `scale(${scale}, ${scale})`,
@@ -120,15 +134,34 @@ export const WorkBox = (props: WorkBoxProps) => {
             onClick={onClick}
           >
             <Slider {...settings}>
-              <BadgesContainer name="Backend skills" badges={backendBadges} />
-              <BadgesContainer name="Frontend skills" badges={frontendBadges} />
-              <BadgesContainer name="Databases" badges={dbBadges} />
-              <BadgesContainer name="UX/UI tools" badges={uxBadges} />
-              <BadgesContainer name="Other" badges={otherBadges} />
+              <BadgesContainer
+                key={"Backend"}
+                name="Backend skills"
+                badges={backendBadges}
+              />
+              <BadgesContainer
+                key={"Frontend"}
+                name="Frontend skills"
+                badges={frontendBadges}
+              />
+              <BadgesContainer
+                key={"Databases"}
+                name="Databases"
+                badges={dbBadges}
+              />
+              <BadgesContainer
+                key={"UX/UI"}
+                name="UX/UI tools"
+                badges={uxBadges}
+              />
+              <BadgesContainer
+                key={"Other"}
+                name="Other"
+                badges={otherBadges}
+              />
             </Slider>
-            <StyledImg src={cancel} onClick={onCloseClick} />
-            <br />
-          </WorkContainer>
+            <StyledCancel src={cancel} onClick={onCloseClick} />
+          </SkillsContainer>
         ))}
     </Transition>
   );
