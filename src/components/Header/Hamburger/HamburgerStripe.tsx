@@ -1,6 +1,6 @@
 import { darken } from "polished";
 import React from "react";
-import { Transition } from "react-spring";
+import { Transition, Spring } from "react-spring";
 import styled, { css } from "styled-components";
 import { Link } from "./Link";
 
@@ -54,54 +54,45 @@ type Props = {
   external?: boolean;
 };
 
-export type LinkProps = {
-  linkTo: string;
-  style: React.CSSProperties;
-  external?: boolean;
-  children?: React.ReactNode;
-};
+const makeClosedStyle = (color: string) => ({
+  background: darken(0.2, color),
+  border: "none",
+  height: 5,
+  padding: "0px 0px 0 0px",
+});
+
+const makeOpenStyle = (color: string) => ({
+  background: "none",
+  border: `2.3px solid ${darken(0.2, color)}`,
+  height: 40,
+  padding: "10px 10px 0 10px",
+});
 
 export class HamburgerStripe extends React.Component<Props, {}> {
   public render() {
     const { disabled, text, external, linkTo, color } = this.props;
 
-    return disabled ? (
-      <Stripe color={color} />
-    ) : (
+    return (
       <Link
         external={external}
         linkTo={linkTo}
+        disabled={disabled}
         style={{
           textDecoration: "none",
         }}
       >
-        <Transition
-          from={{
-            background: darken(0.2, color),
-            height: 5,
-          }}
-          enter={{
-            background: "none",
-            border: `2.3px solid ${darken(0.2, color)}`,
-            height: 40,
-            padding: "10px 10px 0px 10px",
-          }}
-          leave={{
-            background: darken(0.2, color),
-            height: 5,
-          }}
+        <Spring
+          to={disabled ? makeClosedStyle(color) : makeOpenStyle(color)}
           config={{ friction: 15, tension: 200 }}
         >
-          {!disabled &&
-            (style => (
-              <Stripe
-                color={color}
-                style={{ ...style, pointerEvents: "initial" }}
-              >
+          {style => (
+            <Stripe color={color} style={style}>
+              {!disabled && (
                 <HamburgerText text={text} display={!disabled} delay={100} />
-              </Stripe>
-            ))}
-        </Transition>
+              )}
+            </Stripe>
+          )}
+        </Spring>
       </Link>
     );
   }
