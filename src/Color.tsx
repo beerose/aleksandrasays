@@ -1,6 +1,5 @@
 export const enum Color {
   BottomColor = "#cecece",
-
   TopColor = "#FF1654",
   Orange = "#F4D35E",
   Egg = "#EBEBD3",

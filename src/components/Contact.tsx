@@ -4,8 +4,6 @@ import styled from "styled-components";
 import { darken } from "polished";
 import { Transition } from "react-spring";
 import { Color } from "../Color";
-import { Header } from "./Header/Header";
-import { SocialIconsPanel } from "./SocialIcons";
 
 const email = "hello@aleksandrasays.com";
 
@@ -38,13 +36,6 @@ const Contact = ({ visible }: { visible: boolean }) => (
             style={{ opacity, transform: `scale(${scale}, ${scale})` }}
           >
             {email}
-            <div>
-              <SocialIconsPanel
-                color={darken(0.1, Color.BottomColor)}
-                visible={visible}
-                delay={1000}
-              />
-            </div>
           </Container>
         ))}
     </Transition>
