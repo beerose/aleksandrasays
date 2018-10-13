@@ -2,7 +2,6 @@ import React from "react";
 
 type Props = {
   linkTo: string;
-  style?: string;
 };
 
 export class SocialIcon extends React.Component<Props, {}> {

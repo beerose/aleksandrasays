@@ -1,10 +1,10 @@
 import React, { AllHTMLAttributes } from "react";
 import styled from "styled-components";
 
-import { darken } from "polished";
 import { Transition } from "react-spring";
 import { cancel } from "../../assets/svg";
 import { Color } from "../../Color";
+import { StyledCancel } from "./StyledCancel";
 
 const copy = `My name is Aleksandra Sikora and I am a full-stack developer from Wrocław.
 I'm a functional programming enthusiast, constantly experimenting with new
@@ -18,26 +18,28 @@ which gave me a nice opportunity to learn how to stay extremely calm and patient
 `;
 
 const TextComponent = styled.div`
-  color: ${darken(0.3, Color.TopColor)};
-  border: 1px solid ${darken(0.1, Color.TopColor)};
+  color: ${Color.DarkPrimaryColor};
+  border: 1px solid ${Color.PrimaryColor};
   padding: 20px;
-  position: absulote;
+  position: absolute;
   font-size: 1.5em;
   font-weight: 150;
   line-height: 1.4;
   border-radius: 1px;
-  margin: 30px;
-  max-width: 45%;
-`;
+  max-width: 55%;
 
-const StyledImg = styled("img")`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 20px;
-  height: 20px;
-  transform: translate3d(10px, -10px, 0);
-  cursor: pointer;
+  @media (max-device-width: 650px) {
+    font-size: 30px;
+    max-width: 65%;
+  }
+  @media (max-device-width: 580px) {
+    font-size: 35px;
+    max-width: 70%;
+  }
+  @media (max-device-width: 480px) {
+    font-size: 35px;
+    max-width: 75%;
+  }
 `;
 
 type CoreBoxProps = {
@@ -56,20 +58,19 @@ export const CoreBox = (props: CoreBoxProps) => {
     >
       {visible &&
         (({ scale, opacity }) => (
-          <>
-            <TextComponent
-              style={{
-                opacity,
-                transform: `scale(${scale}, ${scale})`,
-              }}
-              onClick={onClick}
-            >
-              <StyledImg src={cancel} onClick={onCloseClick} />
-              {copy}
-              <br />
-              {anotherCopy}
-            </TextComponent>
-          </>
+          <TextComponent
+            style={{
+              position: "absolute",
+              opacity,
+              transform: `scale(${scale}, ${scale})`,
+            }}
+            onClick={onClick}
+          >
+            <StyledCancel src={cancel} onClick={onCloseClick} />
+            {copy}
+            <br />
+            {anotherCopy}
+          </TextComponent>
         ))}
     </Transition>
   );

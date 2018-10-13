@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { darken } from "polished";
 import { Transition } from "react-spring";
 import { Color } from "../Color";
 
@@ -9,7 +8,7 @@ const email = "hello@aleksandrasays.com";
 
 const Container = styled.div`
   position: absolute;
-  color: ${darken(0.1, Color.BottomColor)};
+  color: ${Color.PrimaryColor};
   bottom: 40%;
   font-size: 3.5em;
   font-weight: 700;

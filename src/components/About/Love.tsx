@@ -2,25 +2,27 @@ import React, { AllHTMLAttributes } from "react";
 import Typist from "react-typist";
 import styled from "styled-components";
 
-import { darken } from "polished";
 import { Transition } from "react-spring";
 import { cancel, dice } from "../../assets/svg";
 import { Color } from "../../Color";
+import { StyledCancel } from "./StyledCancel";
 
 const whatILike = [
-  " tennis",
-  " climbing",
-  " reading books",
-  " binge watching netflix",
-  " art galleries",
-  " traveling",
-  " riding a bike",
-  " cooking",
-  " getting flowers",
+  "playing tennis",
+  "climbing",
+  "hiking",
+  "coofee",
+  "reading books",
+  "watching netflix",
+  "art galleries",
+  "traveling",
+  "riding a bike",
+  "cooking",
+  "flowers",
 ];
 
 const LoveContainer = styled.div`
-  color: ${darken(0.3, Color.TopColor)};
+  color: ${Color.DarkPrimaryColor};
   padding-top: 60px;
   position: absulote;
   font-size: 1.5em;
@@ -28,30 +30,44 @@ const LoveContainer = styled.div`
   line-height: 1.4;
   border-radius: 1px;
   max-width: 40%;
-  min-width: 40%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  height: 250px;
-`;
 
-const StyledCancel = styled("img")`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 20px;
-  height: 20px;
-  transform: translate3d(10px, -10px, 0);
-  cursor: pointer;
+  @media (max-device-width: 650px) {
+    font-size: 35px;
+    max-width: 65%;
+  }
+  @media (max-device-width: 580px) {
+    font-size: 45px;
+    max-width: 70%;
+  }
+  @media (max-device-width: 480px) {
+    font-size: 45px;
+    max-width: 75%;
+  }
 `;
 
 const StyledDice = styled("img")`
   width: 60px;
   height: 60px;
   cursor: pointer;
-  padding: 5px;
 
   &:hover {
     transform: scale(1.1, 1.1);
+  }
+
+  @media (max-device-width: 650px) {
+    width: 65px;
+    height: 65px;
+  }
+  @media (max-device-width: 580px) {
+    width: 75px;
+    height: 75px;
+  }
+  @media (max-device-width: 480px) {
+    width: 90px;
+    height: 90px;
   }
 `;
 
@@ -63,17 +79,15 @@ const StyledTitle = styled.div`
 const DiceContainer = styled.div`
   display: flex;
   align-items: center;
-  position: absolute;
   flex-direction: column;
-  bottom: 15px;
-
-  font-size: 15px;
+  font-size: 20px;
+  margin: 30px;
 `;
 
 const TypedTitle = ({ text }: { text: string }) => (
   <StyledTitle>
     I really, really like
-    <Typist key={text}>{text}</Typist>
+    <Typist key={text}> {text}</Typist>
   </StyledTitle>
 );
 
