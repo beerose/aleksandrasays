@@ -4,7 +4,6 @@ import {
   RouteComponentProps,
   withRouter,
 } from "react-router-dom";
-import { Spring } from "react-spring";
 import styled from "styled-components";
 
 import { Color } from "./Color";
@@ -27,6 +26,19 @@ const enum AppSection {
   None = "",
 }
 
+const pathnameToSection = ({ pathname }: { pathname: string }) => {
+  switch (pathname) {
+    case "/":
+      return AppSection.Main;
+    case "/about":
+      return AppSection.About;
+    case "/contact":
+      return AppSection.Contact;
+    default:
+      return AppSection.None;
+  }
+};
+
 const initialState = {
   currentSection: AppSection.None,
 };
@@ -43,44 +55,18 @@ export class Main extends React.Component<MainProps, State> {
   public state = initialState;
 
   public componentDidMount() {
-    switch (this.props.location.pathname) {
-      case "/":
-        this.setState({
-          currentSection: AppSection.Main,
-        });
-        return;
-      case "/about":
-        this.setState({
-          currentSection: AppSection.About,
-        });
-        return;
-      case "/contact":
-        this.setState({
-          currentSection: AppSection.Contact,
-        });
-    }
+    this.setState({
+      currentSection: pathnameToSection(this.props.location),
+    });
   }
 
   public componentWillReceiveProps(nextProps: MainProps) {
     if (nextProps.location.pathname === this.props.location.pathname) {
       return;
     }
-    switch (nextProps.location.pathname) {
-      case "/":
-        this.setState({
-          currentSection: AppSection.Main,
-        });
-        return;
-      case "/about":
-        this.setState({
-          currentSection: AppSection.About,
-        });
-        return;
-      case "/contact":
-        this.setState({
-          currentSection: AppSection.Contact,
-        });
-    }
+    this.setState({
+      currentSection: pathnameToSection(nextProps.location),
+    });
   }
 
   public render() {
