@@ -136,6 +136,6 @@ export class LoveBox extends React.Component<LoveBoxProps, State> {
     );
   }
   private getRandomStuff() {
-    return whatILike[Math.round(Math.random() * whatILike.length)];
+    return whatILike[Math.round(Math.random() * (whatILike.length - 1))];
   }
 }
