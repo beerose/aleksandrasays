@@ -20,7 +20,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Contact = ({ visible }: { visible: boolean }) => (
+export const Contact = ({ visible }: { visible: boolean }) => (
   <Spring
     to={
       visible
@@ -37,5 +37,3 @@ const Contact = ({ visible }: { visible: boolean }) => (
     )}
   </Spring>
 );
-
-export default Contact;

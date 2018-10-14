@@ -1,2 +1,6 @@
-export {default as About} from './About/About';
-export {default as Contact} from './Contact';
+export { About } from "./About/About";
+export { AnimatedPath } from "./AnimatedPath";
+export { Contact } from "./Contact";
+export { Greeting } from "./Greeting";
+export { Header } from "./Header";
+export { SocialIcons } from "./SocialIcons";

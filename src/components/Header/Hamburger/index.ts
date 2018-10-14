@@ -1,1 +1,1 @@
-export { default as Hamburger } from './Hamburger';
+export {Hamburger} from './Hamburger';

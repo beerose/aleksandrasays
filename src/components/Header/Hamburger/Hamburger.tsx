@@ -57,4 +57,4 @@ class HamburgerMenu extends React.Component<Props, State> {
   }
 }
 
-export default onClickOutside(HamburgerMenu);
+export const Hamburger = onClickOutside(HamburgerMenu);

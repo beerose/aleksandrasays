@@ -45,7 +45,7 @@ const defaultState = {
 
 type State = typeof defaultState;
 
-export default class About extends React.Component<Props, State> {
+export class About extends React.Component<Props, State> {
   public state = defaultState;
 
   public componentWillReceiveProps(nextProps: Props) {

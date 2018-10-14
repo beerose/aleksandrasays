@@ -7,11 +7,14 @@ import {
 import styled from "styled-components";
 
 import { Color } from "./Color";
-import { About, Contact } from "./components/";
-import { Header } from "./components/Header/Header";
-import { Greeting } from "./components/Greeting";
-import { SocialIcons } from "./components/SocialIcons";
-import { AnimatedPath } from "./components/AnimatedPath";
+import {
+  Greeting,
+  Header,
+  AnimatedPath,
+  About,
+  Contact,
+  SocialIcons,
+} from "./components/";
 
 const Content = styled.div`
   background-color: ${Color.BottomColor};
