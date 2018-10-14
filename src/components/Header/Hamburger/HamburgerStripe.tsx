@@ -60,22 +60,15 @@ const HamburgerText = ({
 type Props = {
   text: string;
   linkTo: string;
-  disabled: boolean;
+  open: boolean;
   external?: boolean;
-};
-
-export type LinkProps = {
-  linkTo: string;
-  style: React.CSSProperties;
-  external?: boolean;
-  children?: React.ReactNode;
 };
 
 export class HamburgerStripe extends React.Component<Props, {}> {
   public render() {
-    const { disabled, text, external, linkTo } = this.props;
+    const { open, text, external, linkTo } = this.props;
 
-    return disabled ? (
+    return !open ? (
       <Stripe color={Color.PrimaryColor} />
     ) : (
       <Link
@@ -102,10 +95,10 @@ export class HamburgerStripe extends React.Component<Props, {}> {
           }}
           config={{ friction: 15, tension: 200 }}
         >
-          {!disabled &&
+          {open &&
             (style => (
               <Stripe style={{ ...style, pointerEvents: "initial" }}>
-                <HamburgerText text={text} display={!disabled} delay={100} />
+                <HamburgerText text={text} display={open} delay={100} />
               </Stripe>
             ))}
         </Transition>

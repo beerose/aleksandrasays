@@ -5,7 +5,7 @@ import { CopyBox } from "./AboutBox";
 import { CoreBox } from "./Core";
 import { LoveBox } from "./Love";
 import { SkillsBox } from "./Skills";
-import { Transition, Spring } from "react-spring";
+import { Spring } from "react-spring";
 
 const MenuContainer = styled.div`
   width: 100%;

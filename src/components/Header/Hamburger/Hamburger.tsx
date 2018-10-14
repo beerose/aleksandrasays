@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { HamburgerStripe } from "./HamburgerStripe";
 
 type State = {
-  disabled: boolean;
+  open: boolean;
 };
 
 const HamburgerMenuContainer = styled.div`
@@ -27,39 +27,35 @@ class HamburgerMenu extends React.Component<Props, State> {
     position: "right",
   };
   public state: State = {
-    disabled: true,
+    open: false,
   };
 
   public handleClickOutside = () => {
-    this.setState({ ...this.state, disabled: true });
+    this.setState({ ...this.state, open: false });
   };
 
   public handleHamburgerClick = () => {
-    this.setState({ ...this.state, disabled: false });
+    this.setState({ ...this.state, open: true });
   };
   public render() {
-    const { disabled } = this.state;
+    const { open } = this.state;
     return (
       <HamburgerMenuContainer
         onClick={this.handleHamburgerClick}
         style={{
           alignItems: "flex-end",
           right: "15px",
-          pointerEvents: disabled ? "initial" : "none",
+          pointerEvents: open ? "none" : "initial",
         }}
       >
-        <HamburgerStripe linkTo={"about"} disabled={disabled} text="About me" />
+        <HamburgerStripe linkTo={"about"} open={open} text="About me" />
         <HamburgerStripe
           external={true}
           linkTo={"https://www.medium.com/@aleksandrasays"}
-          disabled={disabled}
+          open={open}
           text="Blog"
         />
-        <HamburgerStripe
-          linkTo={"contact"}
-          disabled={disabled}
-          text="Contact"
-        />
+        <HamburgerStripe linkTo={"contact"} open={open} text="Contact" />
       </HamburgerMenuContainer>
     );
   }
