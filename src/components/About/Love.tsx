@@ -24,7 +24,7 @@ const whatILike = [
 const LoveContainer = styled.div`
   color: ${Color.DarkPrimaryColor};
   padding-top: 60px;
-  position: absulote;
+  position: absolute;
   font-size: 1.5em;
   font-weight: 150;
   line-height: 1.4;
