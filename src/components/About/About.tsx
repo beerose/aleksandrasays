@@ -5,7 +5,7 @@ import { CopyBox } from "./AboutBox";
 import { CoreBox } from "./Core";
 import { LoveBox } from "./Love";
 import { SkillsBox } from "./Skills";
-import { Spring } from "react-spring";
+import { Transition } from "react-spring";
 
 const MenuContainer = styled.div`
   width: 100%;
@@ -72,25 +72,24 @@ export default class About extends React.Component<Props, State> {
             onCloseClick={this.handleCloseBoxClick}
           />
         </CopyContainer>
-        <Spring
-          to={
-            currentSection === AboutSection.Menu
-              ? { scale: 1.1, opacity: 1 }
-              : { opacity: 0, scale: 0.9 }
-          }
+        <Transition
+          from={{ opacity: 0, scale: 0.9 }}
+          enter={{ scale: 1.1, opacity: 1 }}
+          leave={{ opacity: 0, scale: 0 }}
           config={{ friction: 5, tension: 60 }}
           delay={currentSection === AboutSection.Menu ? 800 : 0}
         >
-          {({ opacity, scale }) => (
-            <MenuContainer
-              style={{ opacity, transform: `scale(${scale}, ${scale})` }}
-            >
-              <CopyBox title={"Core"} onClick={this.handleCoreClick} />
-              <CopyBox title={"Love"} onClick={this.handleLoveClick} />
-              <CopyBox title={"Skills"} onClick={this.handleWorkClick} />
-            </MenuContainer>
-          )}
-        </Spring>
+          {currentSection === AboutSection.Menu &&
+            (({ opacity, scale }) => (
+              <MenuContainer
+                style={{ opacity, transform: `scale(${scale}, ${scale})` }}
+              >
+                <CopyBox title={"Core"} onClick={this.handleCoreClick} />
+                <CopyBox title={"Love"} onClick={this.handleLoveClick} />
+                <CopyBox title={"Skills"} onClick={this.handleWorkClick} />
+              </MenuContainer>
+            ))}
+        </Transition>
       </AboutContainer>
     );
   }
