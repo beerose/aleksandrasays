@@ -5,6 +5,7 @@ import { CopyBox } from "./AboutBox";
 import { CoreBox } from "./Core";
 import { LoveBox } from "./Love";
 import { SkillsBox } from "./Skills";
+import { Transition } from "react-spring";
 
 const MenuContainer = styled.div`
   width: 100%;
@@ -35,10 +36,11 @@ const enum AboutSection {
   Love = "/love",
   Work = "/work",
   Menu = "/",
+  None = "",
 }
 
 const defaultState = {
-  currentSection: AboutSection.Menu,
+  currentSection: AboutSection.None,
 };
 
 type State = typeof defaultState;
@@ -47,12 +49,11 @@ export default class About extends React.Component<Props, State> {
   public state = defaultState;
 
   public componentWillReceiveProps(nextProps: Props) {
-    if (this.props.aboutVisible !== nextProps.aboutVisible) {
-      this.setState({ ...defaultState });
-    }
+    nextProps.aboutVisible
+      ? this.setState({ currentSection: AboutSection.Menu })
+      : this.setState({ currentSection: AboutSection.None });
   }
   public render() {
-    const { aboutVisible } = this.props;
     const { currentSection } = this.state;
 
     return (
@@ -71,35 +72,32 @@ export default class About extends React.Component<Props, State> {
             onCloseClick={this.handleCloseBoxClick}
           />
         </CopyContainer>
-        {currentSection === AboutSection.Menu && (
-          <MenuContainer>
-            <CopyBox
-              shouldMount={aboutVisible}
-              title={"Core"}
-              onClick={this.handleCoreClick}
-              delay={aboutVisible ? 800 : 0}
-            />
-            <CopyBox
-              shouldMount={aboutVisible}
-              title={"Love"}
-              onClick={this.handleLoveClick}
-              delay={aboutVisible ? 800 : 0}
-            />
-            <CopyBox
-              shouldMount={aboutVisible}
-              title={"Skills"}
-              onClick={this.handleWorkClick}
-              delay={aboutVisible ? 800 : 0}
-            />
-          </MenuContainer>
-        )}
+        <Transition
+          from={{ opacity: 0, scale: 0.9 }}
+          enter={{ scale: 1.1, opacity: 1 }}
+          leave={{ opacity: 0, scale: 0 }}
+          config={{ friction: 5, tension: 60 }}
+          delay={currentSection === AboutSection.Menu ? 800 : 0}
+        >
+          {currentSection === AboutSection.Menu &&
+            (({ opacity, scale }) => (
+              <MenuContainer
+                style={{ opacity, transform: `scale(${scale}, ${scale})` }}
+              >
+                <CopyBox title={"Core"} onClick={this.handleCoreClick} />
+                <CopyBox title={"Love"} onClick={this.handleLoveClick} />
+                <CopyBox title={"Skills"} onClick={this.handleWorkClick} />
+              </MenuContainer>
+            ))}
+        </Transition>
       </AboutContainer>
     );
   }
 
   private goToSection(section: AboutSection) {
-    // history push mby?
-    this.setState({ currentSection: section });
+    this.props.aboutVisible
+      ? this.setState({ currentSection: section })
+      : this.setState({ currentSection: AboutSection.None });
   }
 
   private handleLoveClick = () => {
