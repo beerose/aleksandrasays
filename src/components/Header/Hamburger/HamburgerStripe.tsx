@@ -68,16 +68,8 @@ export class HamburgerStripe extends React.Component<Props, {}> {
   public render() {
     const { open, text, external, linkTo } = this.props;
 
-    return !open ? (
-      <Stripe color={Color.PrimaryColor} />
-    ) : (
-      <Link
-        external={external}
-        linkTo={linkTo}
-        style={{
-          textDecoration: "none",
-        }}
-      >
+    return open ? (
+      <Link external={external} linkTo={linkTo}>
         <Transition
           from={{
             background: Color.PrimaryColor,
@@ -103,6 +95,8 @@ export class HamburgerStripe extends React.Component<Props, {}> {
             ))}
         </Transition>
       </Link>
+    ) : (
+      <Stripe color={Color.PrimaryColor} />
     );
   }
 }

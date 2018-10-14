@@ -8,6 +8,7 @@ type State = {
   open: boolean;
 };
 
+type HamburgerMenuContainerProps = { open: boolean };
 const HamburgerMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,8 +16,10 @@ const HamburgerMenuContainer = styled.div`
   top: 30px;
   cursor: pointer;
   z-index: 1;
-
-  transition: all 10s ease-in;
+  align-items: flex-end;
+  right: 15px;
+  pointer-events: ${(props: HamburgerMenuContainerProps) =>
+    props.open ? "none" : "initial"};
 `;
 
 type Props = {
@@ -40,14 +43,7 @@ class HamburgerMenu extends React.Component<Props, State> {
   public render() {
     const { open } = this.state;
     return (
-      <HamburgerMenuContainer
-        onClick={this.handleHamburgerClick}
-        style={{
-          alignItems: "flex-end",
-          right: "15px",
-          pointerEvents: open ? "none" : "initial",
-        }}
-      >
+      <HamburgerMenuContainer onClick={this.handleHamburgerClick} open={open}>
         <HamburgerStripe linkTo={"about"} open={open} text="About me" />
         <HamburgerStripe
           external={true}

@@ -2,13 +2,17 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 export type LinkProps = {
   linkTo: string;
-  style: React.CSSProperties;
   external?: boolean;
   children?: React.ReactNode;
 };
-export const Link = ({ external, linkTo, ...rest }: LinkProps) =>
+export const Link = ({ external, linkTo, ...children }: LinkProps) =>
   external ? (
-    <a href={linkTo} target="__blank" {...rest} />
+    <a
+      href={linkTo}
+      target="__blank"
+      style={{ textDecoration: "none" }}
+      {...children}
+    />
   ) : (
-    <RouterLink to={linkTo} {...rest} />
+    <RouterLink to={linkTo} style={{ textDecoration: "none" }} {...children} />
   );
