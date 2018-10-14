@@ -34,29 +34,31 @@ export class Greeting extends React.Component<GreetingProps> {
   public render() {
     const { visible } = this.props;
     return (
-      <>
-        <Spring
-          to={visible ? { x: 0, opacity: 1 } : { x: -90, opacity: 0 }}
-          delay={visible ? 1000 : 400}
-          config={{
-            friction: 28,
-            tension: 80,
-          }}
-        >
-          {({ x, opacity }) => (
-            <GreetingContainer
-              style={{
-                opacity,
-                transform: `translate3d(${x}vh, 0, 0)`,
-              }}
-            >
-              Hi!
-              <br />
-              I’m Aleksandra Sikora. Fullstack developer, based in&nbsp;Wrocław.
-            </GreetingContainer>
-          )}
-        </Spring>
-      </>
+      <Spring
+        to={
+          visible
+            ? { x: 0, opacity: 1, display: "flex" }
+            : { x: -90, opacity: 0, display: "none" }
+        }
+        delay={visible ? 1000 : 0}
+        config={{
+          friction: 20,
+          tension: 80,
+        }}
+      >
+        {({ x, opacity }) => (
+          <GreetingContainer
+            style={{
+              opacity,
+              transform: `translate3d(${x}vh, 0, 0)`,
+            }}
+          >
+            Hi!
+            <br />
+            I’m Aleksandra Sikora. Fullstack developer, based in&nbsp;Wrocław.
+          </GreetingContainer>
+        )}
+      </Spring>
     );
   }
 }

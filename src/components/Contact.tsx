@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Transition } from "react-spring";
+import { Spring } from "react-spring";
 import { Color } from "../Color";
 
 const email = "hello@aleksandrasays.com";
@@ -21,24 +21,21 @@ const Container = styled.div`
 `;
 
 const Contact = ({ visible }: { visible: boolean }) => (
-  <>
-    <Transition
-      from={{ opacity: 0, scale: 0.9 }}
-      enter={{ scale: 1.1, opacity: 1 }}
-      leave={{ opacity: 0, scale: 0 }}
-      config={{ duration: 1000 }}
-      delay={visible ? 1000 : 0}
-    >
-      {visible &&
-        (({ scale, opacity }) => (
-          <Container
-            style={{ opacity, transform: `scale(${scale}, ${scale})` }}
-          >
-            {email}
-          </Container>
-        ))}
-    </Transition>
-  </>
+  <Spring
+    to={
+      visible
+        ? { scale: 1.1, opacity: 1, display: "flex" }
+        : { opacity: 0, scale: 0, display: "none" }
+    }
+    config={{ duration: 1000 }}
+    delay={visible ? 1000 : 0}
+  >
+    {({ scale, opacity }) => (
+      <Container style={{ opacity, transform: `scale(${scale}, ${scale})` }}>
+        {email}
+      </Container>
+    )}
+  </Spring>
 );
 
 export default Contact;

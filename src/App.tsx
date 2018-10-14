@@ -12,16 +12,13 @@ import { About, Contact } from "./components/";
 import { Header } from "./components/Header/Header";
 import { Greeting } from "./components/Greeting";
 import { SocialIcons } from "./components/SocialIcons";
+import { AnimatedPath } from "./components/AnimatedPath";
 
 const Content = styled.div`
   background-color: ${Color.BottomColor};
   width: 100%;
   height: 100%;
 `;
-
-const TOP_COLOR_INACTIVE = "M0,0 L0.7,0 L0,1.3 Z";
-const TOP_COLOR_ACTIVE = "M0,0 L2,0 L0,1.2 Z";
-const TOP_COLOR_HIDEN = "M0,0, L-0.1,-0.1 L0,2 Z";
 
 const enum AppSection {
   About = "/about",
@@ -95,44 +92,14 @@ export class Main extends React.Component<MainProps, State> {
 
     return (
       <>
-        <svg
-          viewBox="0 0 1 1"
-          preserveAspectRatio="xMidYMid slice"
-          style={{
-            height: "100%",
-            pointerEvents: "none",
-            position: "absolute",
-            top: 0,
-            width: "100%",
-          }}
-        >
-          <Spring
-            config={{
-              friction: 30,
-              tension: 100,
-            }}
-            to={{
-              TopColorPath:
-                pathname === "/"
-                  ? TOP_COLOR_INACTIVE
-                  : pathname === "/about"
-                    ? TOP_COLOR_ACTIVE
-                    : TOP_COLOR_HIDEN,
-            }}
-            delay={currentSection === AppSection.Main ? 400 : 0}
-          >
-            {({ TopColorPath }) => (
-              <path fill={Color.TopColor} d={TopColorPath} />
-            )}
-          </Spring>
-        </svg>
-        <About aboutVisible={currentSection === AppSection.About} />
+        <AnimatedPath pathname={pathname} />
+        <About visible={currentSection === AppSection.About} />
+        <Greeting visible={currentSection === AppSection.Main} />
+        <Contact visible={currentSection === AppSection.Contact} />
         <SocialIconsContainer>
           <SocialIcons />
         </SocialIconsContainer>
-        <Greeting visible={currentSection === AppSection.Main} />
         <Header showArrow={pathname !== "/"} />
-        <Contact visible={currentSection === AppSection.Contact} />
       </>
     );
   }

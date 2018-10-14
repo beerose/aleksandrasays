@@ -28,7 +28,7 @@ const AboutContainer = styled.div`
 `;
 
 type Props = {
-  aboutVisible: boolean;
+  visible: boolean;
 } & AllHTMLAttributes<HTMLDivElement>;
 
 const enum AboutSection {
@@ -49,7 +49,7 @@ export default class About extends React.Component<Props, State> {
   public state = defaultState;
 
   public componentWillReceiveProps(nextProps: Props) {
-    nextProps.aboutVisible
+    nextProps.visible
       ? this.setState({ currentSection: AboutSection.Menu })
       : this.setState({ currentSection: AboutSection.None });
   }
@@ -72,37 +72,35 @@ export default class About extends React.Component<Props, State> {
             onCloseClick={this.handleCloseBoxClick}
           />
         </CopyContainer>
-        {
-          <Spring
-            to={
-              currentSection === AboutSection.Menu
-                ? { scale: 1.1, opacity: 1, display: "flex" }
-                : { opacity: 0, scale: 0.9, display: "none" }
-            }
-            config={{ friction: 5, tension: 60 }}
-            delay={currentSection === AboutSection.Menu ? 800 : 0}
-          >
-            {({ opacity, scale, display }) => (
-              <MenuContainer
-                style={{
-                  opacity,
-                  transform: `scale(${scale}, ${scale})`,
-                  display,
-                }}
-              >
-                <CopyBox title={"Core"} onClick={this.handleCoreClick} />
-                <CopyBox title={"Love"} onClick={this.handleLoveClick} />
-                <CopyBox title={"Skills"} onClick={this.handleWorkClick} />
-              </MenuContainer>
-            )}
-          </Spring>
-        }
+        <Spring
+          to={
+            currentSection === AboutSection.Menu
+              ? { scale: 1.1, opacity: 1, display: "flex" }
+              : { opacity: 0, scale: 0.9, display: "none" }
+          }
+          config={{ friction: 5, tension: 60 }}
+          delay={currentSection === AboutSection.Menu ? 800 : 0}
+        >
+          {({ opacity, scale, display }) => (
+            <MenuContainer
+              style={{
+                opacity,
+                transform: `scale(${scale}, ${scale})`,
+                display,
+              }}
+            >
+              <CopyBox title={"Core"} onClick={this.handleCoreClick} />
+              <CopyBox title={"Love"} onClick={this.handleLoveClick} />
+              <CopyBox title={"Skills"} onClick={this.handleWorkClick} />
+            </MenuContainer>
+          )}
+        </Spring>
       </AboutContainer>
     );
   }
 
   private goToSection(section: AboutSection) {
-    this.props.aboutVisible
+    this.props.visible
       ? this.setState({ currentSection: section })
       : this.setState({ currentSection: AboutSection.None });
   }
