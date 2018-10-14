@@ -14,6 +14,7 @@ import {
   About,
   Contact,
   SocialIcons,
+  NotFoundPage,
 } from "./components/";
 
 const Content = styled.div`
@@ -85,6 +86,7 @@ export class Main extends React.Component<MainProps, State> {
         <About visible={currentSection === AppSection.About} />
         <Greeting visible={currentSection === AppSection.Main} />
         <Contact visible={currentSection === AppSection.Contact} />
+        <NotFoundPage visible={currentSection === AppSection.None} />
         <SocialIconsContainer>
           <SocialIcons />
         </SocialIconsContainer>
