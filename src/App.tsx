@@ -102,7 +102,7 @@ export class Main extends React.Component<MainProps, State> {
 const MainWithRouter = withRouter(Main);
 
 export const App = () => (
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <Content>
       <MainWithRouter />
     </Content>
