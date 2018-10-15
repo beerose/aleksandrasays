@@ -28,6 +28,7 @@ const enum AppSection {
   Contact = "/contact",
   Main = "/",
   None = "",
+  NotFound = "*",
 }
 
 const pathnameToSection = ({ pathname }: { pathname: string }) => {
@@ -38,6 +39,8 @@ const pathnameToSection = ({ pathname }: { pathname: string }) => {
       return AppSection.About;
     case "/contact":
       return AppSection.Contact;
+    case /\w+/.test(pathname) && pathname:
+      return AppSection.NotFound;
     default:
       return AppSection.None;
   }
@@ -86,7 +89,7 @@ export class Main extends React.Component<MainProps, State> {
         <About visible={currentSection === AppSection.About} />
         <Greeting visible={currentSection === AppSection.Main} />
         <Contact visible={currentSection === AppSection.Contact} />
-        <NotFoundPage visible={currentSection === AppSection.None} />
+        <NotFoundPage visible={currentSection === AppSection.NotFound} />
         <SocialIconsContainer>
           <SocialIcons />
         </SocialIconsContainer>

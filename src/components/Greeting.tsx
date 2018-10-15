@@ -43,7 +43,7 @@ export class Greeting extends React.Component<GreetingProps> {
         delay={visible ? 1000 : 0}
         config={{
           friction: 20,
-          tension: 80,
+          tension: 70,
         }}
       >
         {({ x, opacity }) => (
