@@ -34,7 +34,7 @@ const StyledNotFoundImage = styled.img`
   max-width: 200px;
 `;
 
-const copy = "Oops, the page you're looking for have flown away.";
+const copy = "Oops, the page you're looking for has flown away.";
 
 type NotFoundProps = {
   visible: boolean;

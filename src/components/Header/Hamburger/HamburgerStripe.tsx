@@ -57,6 +57,18 @@ const HamburgerText = ({
   </Transition>
 );
 
+const closeStyles = {
+  background: Color.PrimaryColor,
+  height: 5,
+};
+
+const openStyles = {
+  background: "none",
+  border: `2.3px solid ${Color.PrimaryColor}`,
+  height: 40,
+  padding: "10px 10px 0px 10px",
+};
+
 type Props = {
   text: string;
   linkTo: string;
@@ -71,20 +83,9 @@ export class HamburgerStripe extends React.Component<Props, {}> {
     return open ? (
       <Link external={external} linkTo={linkTo}>
         <Transition
-          from={{
-            background: Color.PrimaryColor,
-            height: 5,
-          }}
-          enter={{
-            background: "none",
-            border: `2.3px solid ${Color.PrimaryColor}`,
-            height: 40,
-            padding: "10px 10px 0px 10px",
-          }}
-          leave={{
-            background: Color.PrimaryColor,
-            height: 5,
-          }}
+          from={closeStyles}
+          enter={openStyles}
+          leave={closeStyles}
           config={{ friction: 15, tension: 200 }}
         >
           {open &&

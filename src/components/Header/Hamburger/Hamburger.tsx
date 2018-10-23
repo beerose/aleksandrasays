@@ -38,7 +38,7 @@ class HamburgerMenu extends React.Component<Props, State> {
   };
 
   public handleHamburgerClick = () => {
-    this.setState({ ...this.state, open: true });
+    this.setState({ ...this.state, open: !this.state.open });
   };
   public render() {
     const { open } = this.state;
