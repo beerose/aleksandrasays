@@ -4,15 +4,26 @@ export type LinkProps = {
   linkTo: string;
   external?: boolean;
   children?: React.ReactNode;
+  enabled?: boolean;
 };
-export const Link = ({ external, linkTo, ...children }: LinkProps) =>
+export const Link = ({ external, linkTo, enabled, ...children }: LinkProps) =>
   external ? (
     <a
       href={linkTo}
       target="__blank"
-      style={{ textDecoration: "none" }}
+      style={{
+        textDecoration: "none",
+        pointerEvents: enabled ? "initial" : "none",
+      }}
       {...children}
     />
   ) : (
-    <RouterLink to={linkTo} style={{ textDecoration: "none" }} {...children} />
+    <RouterLink
+      to={linkTo}
+      style={{
+        textDecoration: "none",
+        pointerEvents: enabled ? "initial" : "none",
+      }}
+      {...children}
+    />
   );
