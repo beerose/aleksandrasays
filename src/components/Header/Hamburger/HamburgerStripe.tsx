@@ -1,21 +1,21 @@
 import React from "react";
-import { Transition } from "react-spring";
+import { Transition, Spring } from "react-spring";
 import styled from "styled-components";
 import { Link } from "./Link";
 import { Color } from "../../../Color";
 
 const Stripe = styled.div`
-  font-size: 25px;
-
   /* Internet Explorer */
   min-width: 44px;
-  height: 4px;
+  min-height: 4px;
+
   margin: 4px;
   border-radius: 2px;
+  font-size: 25px;
 
   --size: 4px;
   min-width: calc(11 * var(--size));
-  height: var(--size);
+  min-height: var(--size);
   margin: var(--size);
   border-radius: calc(var(--size) / 2);
 
@@ -27,22 +27,19 @@ const Stripe = styled.div`
 
   @media (max-device-width: 690px) {
     --size: 8px;
+    font-size: 35px;
   }
   @media (max-device-width: 580px) {
     --size: 10px;
-  }
-  @media (max-device-width: 480px) {
-    --size: 12px;
+    font-size: 35px;
   }
 `;
 
 const HamburgerText = ({
   text,
-  delay,
   display,
 }: {
   text: string;
-  delay: number;
   display: boolean;
 }) => (
   <Transition
@@ -50,7 +47,7 @@ const HamburgerText = ({
     enter={{ opacity: 1 }}
     leave={{ opacity: 0 }}
     config={{ friction: 5, tension: 40 }}
-    delay={delay}
+    delay={150}
   >
     {display &&
       (({ opacity }) => <p style={{ opacity, margin: "0" }}>{text}</p>)}
@@ -59,14 +56,16 @@ const HamburgerText = ({
 
 const closeStyles = {
   background: Color.PrimaryColor,
-  height: 5,
+  border: `0px solid ${Color.PrimaryColor}`,
+  padding: "0px",
+  pointerEvents: "none",
 };
 
 const openStyles = {
-  background: "none",
+  background: Color.Transparent,
   border: `2.3px solid ${Color.PrimaryColor}`,
-  height: 40,
-  padding: "10px 10px 0px 10px",
+  padding: "10px",
+  pointerEvents: "initial",
 };
 
 type Props = {
@@ -80,24 +79,20 @@ export class HamburgerStripe extends React.Component<Props, {}> {
   public render() {
     const { open, text, external, linkTo } = this.props;
 
-    return open ? (
-      <Link external={external} linkTo={linkTo}>
-        <Transition
-          from={closeStyles}
-          enter={openStyles}
-          leave={closeStyles}
-          config={{ friction: 15, tension: 200 }}
-        >
-          {open &&
-            (style => (
-              <Stripe style={{ ...style, pointerEvents: "initial" }}>
-                <HamburgerText text={text} display={open} delay={100} />
-              </Stripe>
-            ))}
-        </Transition>
-      </Link>
-    ) : (
-      <Stripe color={Color.PrimaryColor} />
+    return (
+      <Spring
+        to={open ? openStyles : closeStyles}
+        from={closeStyles}
+        config={{ friction: 15, tension: 150 }}
+      >
+        {style => (
+          <Link external={external} linkTo={linkTo} enabled={open}>
+            <Stripe style={{ ...style }}>
+              {open && <HamburgerText text={text} display={open} />}
+            </Stripe>
+          </Link>
+        )}
+      </Spring>
     );
   }
 }
