@@ -133,6 +133,7 @@ export const SkillsBox = (props: SkillsBoxProps) => {
             }}
             onClick={onClick}
           >
+            <StyledCancel src={cancel} onClick={onCloseClick} />
             <Slider {...settings}>
               <BadgesContainer
                 key={"Backend"}
@@ -160,7 +161,6 @@ export const SkillsBox = (props: SkillsBoxProps) => {
                 badges={otherBadges}
               />
             </Slider>
-            <StyledCancel src={cancel} onClick={onCloseClick} />
           </SkillsContainer>
         ))}
     </Transition>

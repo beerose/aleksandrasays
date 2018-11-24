@@ -1,6 +1,6 @@
 export const enum Color {
-  BottomColor = "#e8e8e8",
-  TopColor = "#FF1654",
+  BottomColor = "#e8e8e8", // gray
+  TopColor = "#bf63d7", // color color
   PrimaryColor = "rgba(0,0,0,0.2)",
   LightPrimaryColor = "rgba(0,0,0,0.1)",
   DarkPrimaryColor = "rgba(0,0,0,0.4)",

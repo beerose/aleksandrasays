@@ -11,7 +11,7 @@ const whatILike = [
   "playing tennis",
   "climbing",
   "hiking",
-  "coofee",
+  "coffee",
   "reading books",
   "watching netflix",
   "art galleries",
